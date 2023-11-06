@@ -39,10 +39,8 @@
 /.metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml
 /.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
 /.metadata/version.ini
-/bundles/fish.payara.eclipse.tools.micro/.settings/org.eclipse.jdt.core.prefs
-/bundles/fish.payara.eclipse.tools.server/.settings/org.eclipse.jdt.core.prefs
-/bundles/fish.payara.eclipse.tools.server/src/fish/payara/eclipse/tools/server/handlers/RefactorHandler.java
-/features/fish.payara.eclipse.tools.micro.feature/.polyglot.build.properties
-/features/fish.payara.eclipse.tools.server.feature/.polyglot.build.properties
+/bundles/org.glassfish.eclipse.tools.server/.settings/org.eclipse.jdt.core.prefs
+/bundles/org.glassfish.eclipse.tools.server/src/fish/payara/eclipse/tools/server/handlers/RefactorHandler.java
+/features/org.glassfish.eclipse.tools.server.feature/.polyglot.build.properties
 /.metadata/.plugins/org.eclipse.m2e.logback/logback.2.1.0.20221015-0744.xml
 /.metadata/

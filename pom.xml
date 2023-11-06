@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>fish.payara.eclipse</groupId>
-    <artifactId>fish.payara.eclipse.root</artifactId>
+
+    <groupId>org.glassfish.eclipse</groupId>
+    <artifactId>org.glassfish.eclipse.root</artifactId>
     <version>2.3.0</version>
     <packaging>pom</packaging>
 
@@ -12,19 +11,19 @@
         <maven>3.0</maven>
     </prerequisites>
 
+    <modules>
+        <module>bundles</module>
+        <module>features</module>
+        <module>releng/org.glassfish.eclipse.${eclipse.target}</module>
+        <module>releng/org.glassfish.eclipse.update</module>
+    </modules>
+
     <properties>
         <tycho.version>3.0.1</tycho.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <eclipse.target>202212</eclipse.target>
         <eclipse-repo.url>https://download.eclipse.org/releases/2022-12</eclipse-repo.url>
     </properties>
-
-    <modules>
-        <module>bundles</module>
-        <module>features</module>
-        <module>releng/fish.payara.eclipse.${eclipse.target}</module>
-        <module>releng/fish.payara.eclipse.update</module>
-    </modules>
 
     <repositories>
         <repository>
@@ -103,8 +102,8 @@
                     </environments>
                     <target>
                         <artifact>
-                            <groupId>fish.payara.eclipse</groupId>
-                            <artifactId>fish.payara.eclipse.${eclipse.target}</artifactId>
+                            <groupId>org.glassfish.eclipse</groupId>
+                            <artifactId>org.glassfish.eclipse.${eclipse.target}</artifactId>
                             <version>${project.version}</version>
                         </artifact>
                     </target>
@@ -112,7 +111,7 @@
             </plugin>
         </plugins>
     </build>
-    
+
     <profiles>
         <profile>
             <id>release</id>
@@ -136,5 +135,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>

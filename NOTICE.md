@@ -1,4 +1,4 @@
-Eclipse Payara Tools
+Eclipse GlassFish Tools
 
 This project is based on the Eclipse GlassFish tools:
 
@@ -19,7 +19,7 @@ Copyright (c) 2018 Oracle
 
 == Additional Copyright holders
 
-Copyright (c) 2018 Payara Foundation
+Copyright (c) 2018 XXXXX Foundation
 
 This project contains icons based on the org.eclipse.images
 

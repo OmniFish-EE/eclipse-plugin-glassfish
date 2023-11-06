@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>fish.payara.eclipse.bundles</artifactId>
-    <packaging>pom</packaging>
 
     <parent>
-        <groupId>fish.payara.eclipse</groupId>
-        <artifactId>fish.payara.eclipse.root</artifactId>
+        <groupId>org.glassfish.eclipse</groupId>
+        <artifactId>org.glassfish.eclipse.root</artifactId>
         <version>2.3.0</version>
     </parent>
 
+    <artifactId>org.glassfish.eclipse.bundles</artifactId>
+    <packaging>pom</packaging>
+
     <modules>
-        <module>fish.payara.eclipse.tools.micro</module>
-        <module>fish.payara.eclipse.tools.server</module>
+        <module>org.glassfish.eclipse.tools.server</module>
     </modules>
 </project>
