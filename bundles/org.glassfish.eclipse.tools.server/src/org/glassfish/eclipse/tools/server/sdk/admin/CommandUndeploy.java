@@ -42,7 +42,7 @@ public class CommandUndeploy extends CommandTargetName {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Constructs an instance of the Payara server undeploy command entity.
+     * Constructs an instance of the GlassFish server undeploy command entity.
      * <p/>
      *
      * @param target Target GlassFish instance.
@@ -52,10 +52,10 @@ public class CommandUndeploy extends CommandTargetName {
     }
 
     /**
-     * Constructs an instance of Payara server undeploy command entity.
+     * Constructs an instance of GlassFish server undeploy command entity.
      * <p/>
      *
-     * @param target Target Payara instance.
+     * @param target Target GlassFish instance.
      */
     public CommandUndeploy(String name, String target) {
         super(COMMAND, name, target);

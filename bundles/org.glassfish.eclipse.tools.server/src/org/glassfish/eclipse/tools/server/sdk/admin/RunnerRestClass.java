@@ -24,7 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to select Payara server admin command runner for command entity.
+ * Annotation to select GlassFish server admin command runner for command entity.
  * <p>
  *
  * @author Tomas Kraus, Peter Benedikovic
@@ -37,10 +37,10 @@ public @interface RunnerRestClass {
     // Instance attributes //
     ////////////////////////////////////////////////////////////////////////////
 
-    /** Payara command runner class as named value. */
+    /** GlassFish command runner class as named value. */
     Class<? extends Runner> runner() default RunnerRest.class;
 
-    /** Override Payara command string if differs from default one. */
+    /** Override GlassFish command string if differs from default one. */
     String command() default "";
 
 }

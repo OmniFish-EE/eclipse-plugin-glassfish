@@ -55,7 +55,7 @@ import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
 import org.glassfish.eclipse.tools.server.ui.wizards.GlassfishWizardResources;
 
 /**
- * Properties that are being shown for the Payara / GlassFish server when e.g. the server is right
+ * Properties that are being shown for the GlassFish / GlassFish server when e.g. the server is right
  * clicked in the Servers view and "Properties" is chosen from the context menu.
  *
  */
@@ -175,7 +175,7 @@ public class ServerPropertyPage extends PropertyPage {
 			public void widgetSelected(SelectionEvent se) {
 
 //				GlassFishRuntime runtime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
-//				CreatePayaraDomain domain = new CreatePayaraDomain(parent.getShell(), payaraServer, runtime);
+//				CreateGlassFishDomain domain = new CreateGlassFishDomain(parent.getShell(), payaraServer, runtime);
 //				domain.open();
 //				String selectedDirectory = domain.getPath();
 //				if (selectedDirectory != null && !selectedDirectory.isEmpty()) {
@@ -339,7 +339,7 @@ public class ServerPropertyPage extends PropertyPage {
 			payaraServer.setHotDeploy(hotDeploy.getSelection());
 			payaraServer.setAttachDebuggerEarly(attachDebuggerEarly.getSelection());
 
-            scheduleShortJob("Update Payara server state", monitor -> {
+            scheduleShortJob("Update GlassFish server state", monitor -> {
 
                 GlassFishServerBehaviour serverBehavior = null;
 

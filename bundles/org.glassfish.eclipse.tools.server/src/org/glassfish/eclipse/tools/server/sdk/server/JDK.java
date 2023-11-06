@@ -41,7 +41,7 @@ import java.util.Optional;
 public final class JDK {
 
     /**
-     * See if the current JDK is legal for running Payara
+     * See if the current JDK is legal for running GlassFish
      *
      * @return true if the JDK is >= 1.6.0
      */

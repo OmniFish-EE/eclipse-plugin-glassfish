@@ -26,7 +26,7 @@ import static org.glassfish.eclipse.tools.server.utils.WtpUtil.load;
 import org.eclipse.wst.server.core.IServer;
 import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
 
-public class OpenServerHomeHandler extends AbstractPayaraSelectionHandler {
+public class OpenServerHomeHandler extends AbstractGlassFishSelectionHandler {
 
     @Override
     public void processSelection(IServer server) {

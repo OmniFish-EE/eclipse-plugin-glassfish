@@ -210,7 +210,7 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 			((Server) getServer()).setServerStatus(new Status(OK, SYMBOLIC_NAME, "Attaching to remote server..."));
 		}
 
-		logMessage("in PayaraServerBehaviourDelegate restart");
+		logMessage("in GlassFishServerBehaviourDelegate restart");
 		stopServer(false);
 
 		Thread thread = new Thread("Synchronous server start") {
@@ -218,10 +218,10 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 			public void run() {
 				try {
 					getServer().getLaunchConfiguration(true, null).launch(launchMode, new NullProgressMonitor());
-					logMessage("PayaraServerBehaviourDelegate restart done");
+					logMessage("GlassFishServerBehaviourDelegate restart done");
 
 				} catch (Exception e) {
-					logError("in PayaraServerBehaviourDelegate restart", e);
+					logError("in GlassFishServerBehaviourDelegate restart", e);
 				}
 			}
 		};
@@ -243,7 +243,7 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 
 		long publishStartTime = System.currentTimeMillis();
 
-		publishModuleForPayara(kind, deltaKind, module, monitor);
+		publishModuleForGlassFish(kind, deltaKind, module, monitor);
 
 		logMessage("done publishModule in " + (System.currentTimeMillis() - publishStartTime) + " ms");
 	}
@@ -290,7 +290,7 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 
 	@Override
 	public void stop(boolean force) {
-		logMessage("in PayaraServerBehaviourDelegate stop");
+		logMessage("in GlassFishServerBehaviourDelegate stop");
 		stopServer(true);
 	}
 
@@ -399,7 +399,7 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 	}
 
 	/**
-	 * Called to attempt to attach debugger to running Payara.
+	 * Called to attempt to attach debugger to running GlassFish.
 	 *
 	 * @param launch
 	 * @param config
@@ -480,7 +480,7 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 
 			config.setAttribute(ATTR_CONNECT_MAP, args);
 		} catch (CoreException ce) {
-			logError("Error when setting debug argument for remote Payara", ce);
+			logError("Error when setting debug argument for remote GlassFish", ce);
 		}
 	}
 
@@ -517,7 +517,7 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 		return false;
 	}
 
-	private void publishModuleForPayara(int kind, int deltaKind, IModule[] module, IProgressMonitor monitor)
+	private void publishModuleForGlassFish(int kind, int deltaKind, IModule[] module, IProgressMonitor monitor)
 			throws CoreException {
 		if (module.length > 1) {// only publish root modules, i.e web modules
 			setModulePublishState(module, PUBLISH_STATE_NONE);

@@ -28,7 +28,7 @@ import org.glassfish.eclipse.tools.server.sdk.GlassFishIdeException;
 import org.glassfish.eclipse.tools.server.sdk.TaskStateListener;
 
 /**
- * Payara Server Deploy Command Entity.
+ * GlassFish Server Deploy Command Entity.
  * <p>
  * Holds data for command. Objects of this class are created by API user.
  * <p>

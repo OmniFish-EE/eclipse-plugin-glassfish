@@ -62,7 +62,7 @@ public class Messages extends NLS {
     public static String canInstallPath;
     public static String possibleInstallExists;
     public static String downloadingServer;
-    public static String notValidPayaraInstall;
+    public static String notValidGlassFishInstall;
 
     public static String register;
     public static String updateCenter;

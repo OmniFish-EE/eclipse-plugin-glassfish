@@ -25,7 +25,7 @@ import org.glassfish.eclipse.tools.server.GlassFishServer;
 import org.glassfish.eclipse.tools.server.sdk.GlassFishIdeException;
 
 /**
- * Payara Server Stop Instance Command Entity.
+ * GlassFish Server Stop Instance Command Entity.
  * <p/>
  * Holds data for command. Objects of this class are created by API user.
  * <p/>

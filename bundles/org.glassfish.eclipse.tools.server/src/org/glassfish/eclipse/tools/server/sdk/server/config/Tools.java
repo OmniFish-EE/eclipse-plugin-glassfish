@@ -21,7 +21,7 @@ package org.glassfish.eclipse.tools.server.sdk.server.config;
 import org.glassfish.eclipse.tools.server.sdk.data.ToolsConfig;
 
 /**
- * Payara tools.
+ * GlassFish tools.
  * <p/>
  *
  * @author Peter Benedikovic, Tomas Kraus
@@ -40,10 +40,10 @@ public class Tools implements ToolsConfig {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Creates an instance of Payara tools.
+     * Creates an instance of GlassFish tools.
      * <p/>
      *
-     * @param asadmin Payara asadmin tool.
+     * @param asadmin GlassFish asadmin tool.
      */
     public Tools(AsadminTool asadmin) {
         this.asadmin = asadmin;

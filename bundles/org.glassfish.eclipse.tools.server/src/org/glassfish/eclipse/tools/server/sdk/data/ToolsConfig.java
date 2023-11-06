@@ -19,7 +19,7 @@
 package org.glassfish.eclipse.tools.server.sdk.data;
 
 /**
- * Payara tools.
+ * GlassFish tools.
  * <p/>
  *
  * @author Peter Benedikovic, Tomas Kraus

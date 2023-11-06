@@ -36,7 +36,7 @@ import org.glassfish.eclipse.tools.server.serverview.WSDesc;
  * <p>
  *
  * <pre>
- * Payara 5 [domain1]
+ * GlassFish 5 [domain1]
  * |- GlassFish Management
  *     |-Resources
  *     |-Deployed Applications
@@ -46,7 +46,7 @@ import org.glassfish.eclipse.tools.server.serverview.WSDesc;
  * </p>
  *
  * <p>
- * Payara / GlassFish is dynamically queried for this list, hence it can only be retrieved for a
+ * GlassFish / GlassFish is dynamically queried for this list, hence it can only be retrieved for a
  * running server. </>
  *
  */

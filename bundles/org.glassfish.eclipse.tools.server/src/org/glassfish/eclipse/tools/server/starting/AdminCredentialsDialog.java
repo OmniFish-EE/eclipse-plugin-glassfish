@@ -60,7 +60,7 @@ public class AdminCredentialsDialog extends TitleAreaDialog {
     @Override
     public void create() {
         super.create();
-        super.getShell().setText("Payara Administrator Credentials");
+        super.getShell().setText("GlassFish Administrator Credentials");
         setTitle("Wrong user name or password");
         setMessage("Authorization failed while checking " + serverWorkingCopy.getName()
             + " status. Please provide valid administrator credentials.", IMessageProvider.WARNING);

@@ -50,7 +50,7 @@ import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
  *
  */
 @SuppressWarnings("restriction")
-public class TestRemotePayaraConnectionAction {
+public class TestRemoteGlassFishConnectionAction {
 
     protected Object run(IServerWorkingCopy wc) {
         GlassFishServer payaraServer = load(wc, GlassFishServer.class);

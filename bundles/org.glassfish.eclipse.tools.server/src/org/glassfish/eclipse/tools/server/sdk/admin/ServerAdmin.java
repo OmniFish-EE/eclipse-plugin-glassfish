@@ -33,9 +33,9 @@ import org.glassfish.eclipse.tools.server.GlassFishServer;
 import org.glassfish.eclipse.tools.server.sdk.TaskStateListener;
 
 /**
- * Payara Administration Command API.
+ * GlassFish Administration Command API.
  * <p>
- * Payara command facade allows remote and local server handling.
+ * GlassFish command facade allows remote and local server handling.
  * <p>
  *
  * @author Tomas Kraus, Peter Benedikovic
@@ -47,12 +47,12 @@ public class ServerAdmin {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Set global password authenticator for Payara servers.
+     * Set global password authenticator for GlassFish servers.
      * <p/>
      * This method must be called before first usage of <code>Runner.call()</code> method.
      * <p/>
      *
-     * @param authenticator External authenticator for Payara servers to be supplied.
+     * @param authenticator External authenticator for GlassFish servers to be supplied.
      */
     public static void init(Authenticator authenticator) {
         Runner.init(authenticator);

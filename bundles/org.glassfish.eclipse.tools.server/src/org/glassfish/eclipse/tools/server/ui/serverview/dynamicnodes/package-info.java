@@ -1,6 +1,6 @@
 
 /**
- * This package contains the tree nodes that are rendered underneath a running Payara / GlassFish
+ * This package contains the tree nodes that are rendered underneath a running GlassFish / GlassFish
  * server in the Servers view.
  *
  * <p>
@@ -9,7 +9,7 @@
  * <p>
  *
  * <pre>
- * Payara 5 [domain1]
+ * GlassFish 5 [domain1]
  * |- GlassFish Management
  *     |-Resources
  *     |-Deployed Applications

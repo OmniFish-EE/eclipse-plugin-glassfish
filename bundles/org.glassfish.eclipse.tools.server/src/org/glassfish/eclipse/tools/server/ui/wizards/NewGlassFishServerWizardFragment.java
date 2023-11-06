@@ -69,7 +69,7 @@ import org.eclipse.wst.server.core.internal.Runtime;
 
 /**
  * This wizard fragment plugs-in the wizard flow when
- * <code>Servers -> New Server -> Payara -> Payara</code> is selected and
+ * <code>Servers -> New Server -> GlassFish -> GlassFish</code> is selected and
  * subsequently the <code>next</code> button is pressed.
  *
  * <p>
@@ -245,7 +245,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 			@Override
 			public void widgetSelected(SelectionEvent se) {
 				GlassFishRuntime runtime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
-				CreatePayaraDomain domain = new CreatePayaraDomain(parent.getShell(), payaraServer, runtime);
+				CreateGlassFishDomain domain = new CreateGlassFishDomain(parent.getShell(), payaraServer, runtime);
 				domain.open();
 				String selectedDirectory = domain.getPath();
 				if (selectedDirectory != null && !selectedDirectory.isEmpty()) {
@@ -525,7 +525,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 	}
 
 	private void updateServerName() {
-		GlassFishServer payaraServer = getPayaraServer();
+		GlassFishServer payaraServer = getGlassFishServer();
 		String name = getServer().getRuntime().getName() + " [";
 
 		if (payaraServer.isRemote()) {
@@ -551,7 +551,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 	}
 
 	@SuppressWarnings("unused")
-	private GlassFishServer getPayaraServer() {
+	private GlassFishServer getGlassFishServer() {
 		GlassFishServer payaraServer = getServer().getAdapter(GlassFishServer.class);
 		if (payaraServer == null)
 			payaraServer = (GlassFishServer) getServer().loadAdapter(GlassFishServer.class, null);

@@ -31,7 +31,7 @@ import org.glassfish.eclipse.tools.server.GlassFishServerPlugin;
 import org.glassfish.eclipse.tools.server.sdk.server.FetchLog;
 
 // TODO will be GlassfishLocalConsole in the future, new GlassfishRemoteConsole to be implemented
-public class GlassFishConsole extends AbstractPayaraConsole implements IPayaraConsole {
+public class GlassFishConsole extends AbstractGlassFishConsole implements IGlassFishConsole {
 
     private static ScheduledExecutorService stopService = Executors.newSingleThreadScheduledExecutor();
 
@@ -149,13 +149,13 @@ public class GlassFishConsole extends AbstractPayaraConsole implements IPayaraCo
     }
 
     @Override
-    public synchronized boolean hasLoggedPayara() {
+    public synchronized boolean hasLoggedGlassFish() {
         if (readers == null) {
             return false;
         }
 
         for (LogReader logReader : readers) {
-            if (logReader.hasProcessedPayara()) {
+            if (logReader.hasProcessedGlassFish()) {
                 return true;
             }
         }

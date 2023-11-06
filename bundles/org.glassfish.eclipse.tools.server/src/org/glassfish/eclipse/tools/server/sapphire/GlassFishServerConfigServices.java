@@ -38,7 +38,7 @@ import org.eclipse.wst.server.core.IServerWorkingCopy;
 import org.glassfish.eclipse.tools.server.GlassFishRuntime;
 import org.glassfish.eclipse.tools.server.GlassFishServer;
 
-public final class PayaraServerConfigServices {
+public final class GlassFishServerConfigServices {
 
 
 
@@ -48,9 +48,9 @@ public final class PayaraServerConfigServices {
 //            super.initDefaultValueService();
 //
 //            // There is no need to detach the listener as the life cycle of the JDK and
-//            // Payara location properties is the same.
+//            // GlassFish location properties is the same.
 //
-//            context(IPayaraRuntimeModel.class).getServerRoot().attach(new FilteredListener<PropertyEvent>() {
+//            context(IGlassFishRuntimeModel.class).getServerRoot().attach(new FilteredListener<PropertyEvent>() {
 //                @Override
 //                protected void handleTypedEvent(final PropertyEvent event) {
 //                    refresh();
@@ -60,7 +60,7 @@ public final class PayaraServerConfigServices {
 //
 //        @Override
 //        protected boolean acceptable(final IVMInstall jvm) {
-//            if (context(IPayaraRuntimeModel.class).getServerRoot().validation().ok()) {
+//            if (context(IGlassFishRuntimeModel.class).getServerRoot().validation().ok()) {
 //                final IRuntime r = context(Value.class).element().adapt(IRuntime.class);
 //                final GlassFishRuntime gf = (GlassFishRuntime) r.loadAdapter(GlassFishRuntime.class, null);
 //                return validateJvm(jvm).jdk().version(gf.getJavaVersionConstraint()).result().ok();
@@ -119,9 +119,9 @@ public final class PayaraServerConfigServices {
 //            super.initValidationService();
 //
 //            // There is no need to detach the listener as the life cycle of the JDK and
-//            // Payara location properties is the same.
+//            // GlassFish location properties is the same.
 //
-//            context(IPayaraRuntimeModel.class).getServerRoot().attach(new FilteredListener<PropertyContentEvent>() {
+//            context(IGlassFishRuntimeModel.class).getServerRoot().attach(new FilteredListener<PropertyContentEvent>() {
 //                @Override
 //                protected void handleTypedEvent(final PropertyContentEvent event) {
 //                    refresh();
@@ -144,21 +144,21 @@ public final class PayaraServerConfigServices {
 //
 //        @Override
 //        public void handle(final Event event) {
-//            IPayaraRuntimeModel model = ((PropertyEvent) event)
+//            IGlassFishRuntimeModel model = ((PropertyEvent) event)
 //                    .property()
-//                    .nearest(IPayaraRuntimeModel.class);
+//                    .nearest(IGlassFishRuntimeModel.class);
 //
 //            Version payaraVersion = null;
 //
 //            Path payaraRootLocation = model.getServerRoot().content();
 //
 //            if (payaraRootLocation != null) {
-//                PayaraLocationUtils payaraInstall = find(payaraRootLocation.toFile());
+//                GlassFishLocationUtils payaraInstall = find(payaraRootLocation.toFile());
 //
 //                if (payaraInstall == null) {
 //                    for (Path subFolder : subFoldersToSearch) {
 //                        Path potentialRootLocation = payaraRootLocation.append(subFolder);
-//                        payaraInstall = PayaraLocationUtils.find(potentialRootLocation.toFile());
+//                        payaraInstall = GlassFishLocationUtils.find(potentialRootLocation.toFile());
 //
 //                        if (payaraInstall != null) {
 //                            model.setServerRoot(potentialRootLocation);

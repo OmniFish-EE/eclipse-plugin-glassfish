@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.glassfish.eclipse.tools.server.GlassFishServerPlugin;
 
 /**
- * This thread refreshes the Payara libraries container, effectively
+ * This thread refreshes the GlassFish libraries container, effectively
  * whenever ".settings/org.eclipse.wst.common.project.facet.core.xml" in
  * a project changes.
  *

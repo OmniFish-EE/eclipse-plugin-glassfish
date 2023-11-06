@@ -26,9 +26,9 @@ import org.glassfish.eclipse.tools.server.sdk.server.parser.ConfigReaderServer;
 import org.glassfish.eclipse.tools.server.sdk.server.parser.TreeParser;
 
 /**
- * Payara configuration reader API.
+ * GlassFish configuration reader API.
  * <p/>
- * Allows to access Payara server features and libraries configuration XML file using configuration
+ * Allows to access GlassFish server features and libraries configuration XML file using configuration
  * XML file parser.
  * <p/>
  * XML configuration file reader is called only once. Any subsequent configuration values access
@@ -59,10 +59,10 @@ public class GlassFishConfigXMLImpl implements GlassFishConfig {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Creates an instance of Payara configuration API.
+     * Creates an instance of GlassFish configuration API.
      * <p/>
      *
-     * @param configFile Payara configuration XML file.
+     * @param configFile GlassFish configuration XML file.
      */
     public GlassFishConfigXMLImpl(final URL configFile) {
         this.configFile = configFile;
@@ -74,10 +74,10 @@ public class GlassFishConfigXMLImpl implements GlassFishConfig {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Get Payara libraries configuration.
+     * Get GlassFish libraries configuration.
      * <p/>
      *
-     * @return Payara libraries configuration.
+     * @return GlassFish libraries configuration.
      */
     @Override
     public List<LibraryNode> getLibrary() {
@@ -86,10 +86,10 @@ public class GlassFishConfigXMLImpl implements GlassFishConfig {
     }
 
     /**
-     * Get Payara JavaEE configuration.
+     * Get GlassFish JavaEE configuration.
      * <p/>
      *
-     * @return Payara JavaEE configuration.
+     * @return GlassFish JavaEE configuration.
      */
     @Override
     public JavaEESet getJavaEE() {
@@ -98,10 +98,10 @@ public class GlassFishConfigXMLImpl implements GlassFishConfig {
     }
 
     /**
-     * Get Payara JavaSE configuration.
+     * Get GlassFish JavaSE configuration.
      * <p/>
      *
-     * @return Payara JavaSE configuration.
+     * @return GlassFish JavaSE configuration.
      */
     @Override
     public JavaSESet getJavaSE() {
@@ -110,10 +110,10 @@ public class GlassFishConfigXMLImpl implements GlassFishConfig {
     }
 
     /**
-     * Get Payara tools configuration.
+     * Get GlassFish tools configuration.
      * <p/>
      *
-     * @return Payara tools configuration.
+     * @return GlassFish tools configuration.
      */
     @Override
     public Tools getTools() {
@@ -126,7 +126,7 @@ public class GlassFishConfigXMLImpl implements GlassFishConfig {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Make sure Payara configuration XML file was read and processed.
+     * Make sure GlassFish configuration XML file was read and processed.
      */
     private void readXml() {
         if (readDone) {

@@ -25,7 +25,7 @@ import static org.eclipse.jdt.core.JavaCore.getClasspathContainer;
 import static org.eclipse.jdt.core.JavaCore.newClasspathAttribute;
 import static org.eclipse.jdt.core.JavaCore.newLibraryEntry;
 import static org.eclipse.jdt.core.JavaCore.setClasspathContainer;
-import static org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils.DEFAULT_LIBRARIES;
+import static org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils.DEFAULT_LIBRARIES;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -52,11 +52,11 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.osgi.util.NLS;
 import org.glassfish.eclipse.tools.server.GlassFishServerPlugin;
 import org.glassfish.eclipse.tools.server.utils.ListFactory;
-import org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils;
+import org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils;
 import org.glassfish.eclipse.tools.server.utils.Version;
 
 /**
- * This container manages the Payara "system" libraries, which is a selection from the
+ * This container manages the GlassFish "system" libraries, which is a selection from the
  * jar files in mostly glassfish/modules
  *
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -80,13 +80,13 @@ public final class SystemLibrariesContainer implements IClasspathContainer {
             ResourceChangeListener.register();
 
             containersRefresherThread = new ContainersRefresherThread();
-            containersRefresherThread.setName("PayaraLibraryContainersRefresher");
+            containersRefresherThread.setName("GlassFishLibraryContainersRefresher");
             containersRefresherThread.start();
         }
     }
 
     private SystemLibrariesContainer(IPath containerPath, IJavaProject project) {
-        PayaraLocationUtils locationUtils = PayaraLocationUtils.find(project);
+        GlassFishLocationUtils locationUtils = GlassFishLocationUtils.find(project);
 
         String libraryGroup = DEFAULT_LIBRARIES;
         if (containerPath.segmentCount() > 1) {

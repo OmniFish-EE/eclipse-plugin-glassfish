@@ -18,26 +18,29 @@
 
 package org.glassfish.eclipse.tools.server.log;
 
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ScheduledFuture;
+import org.eclipse.ui.console.IConsole;
+import org.glassfish.eclipse.tools.server.sdk.server.FetchLog;
 
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
+public interface IGlassFishConsole extends IConsole {
 
-public abstract class AbstractPayaraConsole extends MessageConsole implements IPayaraConsole {
+    void startLogging();
 
-    protected List<LogReader> readers;
-    protected MessageConsoleStream out;
-    protected CountDownLatch latch;
-    protected ILogFilter filter;
-    protected ScheduledFuture<?> stopJobResult;
+    void startLogging(FetchLog... logFetchers);
 
-    public AbstractPayaraConsole(String name, ImageDescriptor imageDescriptor, ILogFilter filter) {
-        super(name, imageDescriptor);
-        this.filter = filter;
-        this.out = newMessageStream();
-    }
+    void setLogFilter(ILogFilter filter);
+
+    boolean isLogging();
+
+    boolean hasLogged();
+
+    boolean hasLoggedGlassFish();
+
+    void stopLogging();
+
+    void stopLogging(int afterSeconds);
+
+
+
+
 
 }

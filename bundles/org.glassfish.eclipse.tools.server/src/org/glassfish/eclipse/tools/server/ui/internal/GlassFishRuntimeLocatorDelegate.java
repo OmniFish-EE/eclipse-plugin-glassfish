@@ -35,7 +35,7 @@ import org.eclipse.wst.server.core.internal.RuntimeWorkingCopy;
 import org.eclipse.wst.server.core.model.RuntimeLocatorDelegate;
 import org.glassfish.eclipse.tools.server.GlassFishRuntime;
 import org.glassfish.eclipse.tools.server.GlassFishServerPlugin;
-import org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils;
+import org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils;
 
 @SuppressWarnings("restriction")
 public final class GlassFishRuntimeLocatorDelegate extends RuntimeLocatorDelegate {
@@ -74,7 +74,7 @@ public final class GlassFishRuntimeLocatorDelegate extends RuntimeLocatorDelegat
     }
 
     private static IRuntime create(File gfhome) throws CoreException {
-        PayaraLocationUtils install = PayaraLocationUtils.find(gfhome);
+        GlassFishLocationUtils install = GlassFishLocationUtils.find(gfhome);
         if ((install == null) || (findRuntime(gfhome) != null)) {
             return null;
         }
@@ -93,7 +93,7 @@ public final class GlassFishRuntimeLocatorDelegate extends RuntimeLocatorDelegat
 
         final GlassFishRuntime gf = (GlassFishRuntime) rwc.loadAdapter(GlassFishRuntime.class, null);
         
-//        final IPayaraRuntimeModel gfmodel = gf.getModel();
+//        final IGlassFishRuntimeModel gfmodel = gf.getModel();
 //        final Value<org.eclipse.sapphire.modeling.Path> javaRuntimeEnvironmentProperty = gfmodel
 //                .getJavaRuntimeEnvironment();
 

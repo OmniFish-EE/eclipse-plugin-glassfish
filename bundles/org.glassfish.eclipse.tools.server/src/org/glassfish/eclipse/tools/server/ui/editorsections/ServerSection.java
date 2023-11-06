@@ -48,7 +48,7 @@ import org.glassfish.eclipse.tools.server.ui.properties.ServerPropertyPage;
 
 /**
  * This class contributes content to the "Server Editor", which is the editor that opens when you
- * double click the Payara / GlassFish server in the Servers views.
+ * double click the GlassFish / GlassFish server in the Servers views.
  *
  * <p>
  * This is the editor that shows the "Runtime Environment", "Open Launch Configuration" links and

@@ -111,10 +111,10 @@ public class ServerTasks {
     ));
 
     /**
-     * Convenient method to start Payara in START mode.
+     * Convenient method to start GlassFish in START mode.
      * <p/>
      *
-     * @param server Payara server entity.
+     * @param server GlassFish server entity.
      * @param args Startup arguments provided by caller.
      * @return ResultProcess returned by CommandStartDAS to give caller opportunity to monitor the start
      * process.
@@ -125,14 +125,14 @@ public class ServerTasks {
     }
 
     /**
-     * Starts local Payara server.
+     * Starts local GlassFish server.
      * <p/>
      * The own start is done by calling CommandStartDAS. This method prepares command-line arguments
      * that need to be provided for the command. The parameters come from domain.xml and from parameter
      * <code>args</code> provided by the caller.
      * <p/>
      *
-     * @param server Payara server entity.
+     * @param server GlassFish server entity.
      * @param args Startup arguments provided by caller.
      * @param mode Mode which we are starting GF in.
      * @return ResultProcess returned by CommandStartDAS to give caller opportunity to monitor the start

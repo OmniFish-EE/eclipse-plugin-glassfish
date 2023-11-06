@@ -2,9 +2,9 @@
 <definition>
 	<dialog>
 		<id>FindJavaDialog</id>
-		<label>Locate JDK for Payara</label>
+		<label>Locate JDK for GlassFish</label>
 		<content>
-			<label>Payara has been detected. A compatible JDK is needed in order to define this runtime.</label>
+			<label>GlassFish has been detected. A compatible JDK is needed in order to define this runtime.</label>
 			<spacer></spacer>
 			<property-editor>
 				<hint>

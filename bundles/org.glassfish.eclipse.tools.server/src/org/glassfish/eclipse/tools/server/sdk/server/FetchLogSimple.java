@@ -33,7 +33,7 @@ public class FetchLogSimple extends FetchLog {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Constructs an instance of Payara server log fetcher using provided stream.
+     * Constructs an instance of GlassFish server log fetcher using provided stream.
      * <p/>
      * Super class constructor will not call <code>initInputStream</code> method so this method should
      * be ignored. Old log lines are never skipped so whole log is always available in

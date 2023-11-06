@@ -24,7 +24,7 @@ import org.eclipse.wst.server.core.IServer;
 import org.eclipse.wst.server.core.IServerType;
 
 /**
- * Set of utility methods to help determining whether something constitutes "Payara" or "GlassFish".
+ * Set of utility methods to help determining whether something constitutes "GlassFish" or "GlassFish".
  *
  *
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>

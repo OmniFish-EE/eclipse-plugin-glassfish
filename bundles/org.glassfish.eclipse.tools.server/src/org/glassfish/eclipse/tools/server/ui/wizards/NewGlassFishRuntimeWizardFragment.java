@@ -73,14 +73,14 @@ import static org.eclipse.wst.server.core.ServerCore.getServers;
 
 /**
  * This wizard fragment plugs-in the wizard flow when
- * <code>Servers -> New Server -> Payara -> Payara</code> is selected and
+ * <code>Servers -> New Server -> GlassFish -> GlassFish</code> is selected and
  * subsequently the <code>next</code> button is pressed when no runtime exists
  * yet, or the <code>add</code> button next to
  * <code>Server runtime environment</code> is pressed.
  *
  * <p>
  * This fragment essentially causes the screen with <code>Name</code>,
- * <code>Payara location</code>, <code>Java Location</code> etc to be rendered.
+ * <code>GlassFish location</code>, <code>Java Location</code> etc to be rendered.
  *
  */
 @SuppressWarnings("restriction")

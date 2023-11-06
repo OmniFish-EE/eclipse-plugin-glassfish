@@ -39,7 +39,7 @@ import org.glassfish.eclipse.tools.server.GlassFishServer;
  *
  * <p>
  * The main (and currently only) action that's is taken after such an event is creating
- * and updating a project in the workspace that shows the content of the Payara's domain
+ * and updating a project in the workspace that shows the content of the GlassFish's domain
  * folder to which this server corresponds.
  *
  * @author Arjan Tijms

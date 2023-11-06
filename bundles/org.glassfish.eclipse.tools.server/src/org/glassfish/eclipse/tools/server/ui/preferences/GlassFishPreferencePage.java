@@ -44,7 +44,7 @@ public class GlassFishPreferencePage extends FieldEditorPreferencePage implement
     public GlassFishPreferencePage() {
         super(GRID);
         setPreferenceStore(GlassFishServerPlugin.getInstance().getPreferenceStore());
-        setDescription("You can configure Payara Enterprise Server Plugin global preferences");
+        setDescription("You can configure GlassFish Enterprise Server Plugin global preferences");
     }
 
     /**
@@ -56,18 +56,18 @@ public class GlassFishPreferencePage extends FieldEditorPreferencePage implement
         addField(
                 new BooleanFieldEditor(
                         ENABLE_LOG,
-                        "&Enable Payara Plugin Log information in the IDE log file",
+                        "&Enable GlassFish Plugin Log information in the IDE log file",
                         getFieldEditorParent()));
         addField(
                 new BooleanFieldEditor(
                         ENABLE_START_VERBOSE,
-                        "&Start Payara Server in verbose mode (the Eclipse console can be used)",
+                        "&Start GlassFish Server in verbose mode (the Eclipse console can be used)",
                         getFieldEditorParent()));
 
         addField(
                 new BooleanFieldEditor(
                         ENABLE_COLORS_CONSOLE,
-                        "Enable colored rendering in the Payara Log Viewer",
+                        "Enable colored rendering in the GlassFish Log Viewer",
                         getFieldEditorParent()));
     }
 

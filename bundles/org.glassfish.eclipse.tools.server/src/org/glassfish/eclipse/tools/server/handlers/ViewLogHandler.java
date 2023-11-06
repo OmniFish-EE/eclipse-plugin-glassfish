@@ -27,10 +27,10 @@ import static org.glassfish.eclipse.tools.server.utils.WtpUtil.load;
 import org.eclipse.wst.server.core.IServer;
 import org.glassfish.eclipse.tools.server.GlassFishServer;
 import org.glassfish.eclipse.tools.server.ServerStatus;
-import org.glassfish.eclipse.tools.server.log.IPayaraConsole;
+import org.glassfish.eclipse.tools.server.log.IGlassFishConsole;
 import org.glassfish.eclipse.tools.server.sdk.server.FetchLogPiped;
 
-public class ViewLogHandler extends AbstractPayaraSelectionHandler {
+public class ViewLogHandler extends AbstractGlassFishSelectionHandler {
 
     @Override
     public void processSelection(IServer server) {
@@ -46,7 +46,7 @@ public class ViewLogHandler extends AbstractPayaraSelectionHandler {
                 removeServerLogFileConsole(serverAdapter);
             }
 
-            IPayaraConsole console = getServerLogFileConsole(serverAdapter);
+            IGlassFishConsole console = getServerLogFileConsole(serverAdapter);
             showConsole(getServerLogFileConsole(serverAdapter));
 
             if (!console.isLogging()) {

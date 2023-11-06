@@ -24,7 +24,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * This class implements the properties that are shown when Payara is set as a target runtime for a project
+ * This class implements the properties that are shown when GlassFish is set as a target runtime for a project
  * and the corresponding library container is right clicked and then <code>properties</code> are selected.
  *
  * <p>
@@ -33,13 +33,13 @@ import org.eclipse.swt.widgets.Composite;
  * <p>
  * <verbatim>
  * <code>
- * Project explorer - [project name] - Java Resources - Libraries - Payara System Libraries - (right click) - Properties
+ * Project explorer - [project name] - Java Resources - Libraries - GlassFish System Libraries - (right click) - Properties
  * </code>
  * </verbatim>
  *
  * <p>
- * The properties this dialog implements are the choice between the default libraries for a Payara version that are targeted
- * at application developers, and all the available libraries in Payara.
+ * The properties this dialog implements are the choice between the default libraries for a GlassFish version that are targeted
+ * at application developers, and all the available libraries in GlassFish.
  *
  * @author Arjan Tijms
  *
@@ -55,7 +55,7 @@ public class ClasspathContainerPage extends WizardPage implements IClasspathCont
 
     @Override
     public void createControl(Composite parent) {
-        setTitle("Payara System Library");
+        setTitle("GlassFish System Library");
         setDescription("Select system library variant for the project build path.");
         setMessage("Select system library variant for the project build path.");
 

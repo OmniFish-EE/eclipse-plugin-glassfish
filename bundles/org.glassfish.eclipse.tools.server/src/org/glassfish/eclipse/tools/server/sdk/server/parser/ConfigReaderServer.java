@@ -152,30 +152,30 @@ public class ConfigReaderServer extends TreeParser.NodeListener implements
     }
 
     /**
-     * Get JavaEE set for Payara features configuration read from XML.
+     * Get JavaEE set for GlassFish features configuration read from XML.
      * <p/>
      *
-     * @return JavaEE set for Payara features configuration read from XML.
+     * @return JavaEE set for GlassFish features configuration read from XML.
      */
     public JavaEESet getJavaEE() {
         return javaEEReader.javaEE;
     }
 
     /**
-     * Get JavaSE set for Payara features configuration read from XML.
+     * Get JavaSE set for GlassFish features configuration read from XML.
      * <p/>
      *
-     * @return JavaSE set for Payara features configuration read from XML.
+     * @return JavaSE set for GlassFish features configuration read from XML.
      */
     public JavaSESet getJavaSE() {
         return javaSEReader.javaSE;
     }
 
     /**
-     * Get Payara tools configuration read from XML.
+     * Get GlassFish tools configuration read from XML.
      * <p/>
      *
-     * @return Payara tools configuration read from XML.
+     * @return GlassFish tools configuration read from XML.
      */
     public Tools getTools() {
         return configReaderTools.tools;

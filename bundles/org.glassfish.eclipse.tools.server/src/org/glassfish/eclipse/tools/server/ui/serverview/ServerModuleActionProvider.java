@@ -68,7 +68,7 @@ public class ServerModuleActionProvider extends GenericActionProvider {
                     GlassFishServerBehaviour serverBehaviour = load(server, GlassFishServerBehaviour.class);
 
                     if (serverBehaviour == null) {
-                        // Probably an other server was selected than Payara
+                        // Probably an other server was selected than GlassFish
                         return;
                     }
 

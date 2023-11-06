@@ -27,12 +27,12 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.glassfish.eclipse.tools.server.GlassFishServer;
 
 /**
- * This factory class enforces certain rules regarding Payara consoles.
+ * This factory class enforces certain rules regarding GlassFish consoles.
  *
  * <ol>
- *     <li>There is only one standard Payara console.</li>
+ *     <li>There is only one standard GlassFish console.</li>
  *     <li>A user can trigger showing the server log file console that shows the whole server.log file. </li>
- *     <li>A startup process console exists during the startup process of Payara. Unless the startup
+ *     <li>A startup process console exists during the startup process of GlassFish. Unless the startup
  *         does not fail it will not be shown to the user.</li>
  * </ol>
  *
@@ -43,7 +43,7 @@ public class GlassFishConsoleManager {
 
     private static IConsoleManager manager = ConsolePlugin.getDefault().getConsoleManager();
 
-    public static IPayaraConsole showConsole(IPayaraConsole console) {
+    public static IGlassFishConsole showConsole(IGlassFishConsole console) {
         manager.addConsoles(new IConsole[] { console });
         manager.showConsoleView(console);
         return console;
@@ -56,9 +56,9 @@ public class GlassFishConsoleManager {
      * @param server
      * @return
      */
-    public static IPayaraConsole getStandardConsole(GlassFishServer server) {
+    public static IGlassFishConsole getStandardConsole(GlassFishServer server) {
         String consoleID = createStandardConsoleName(server);
-        IPayaraConsole gfConsole = findConsole(consoleID);
+        IGlassFishConsole gfConsole = findConsole(consoleID);
         if (gfConsole == null) {
             gfConsole = new GlassFishConsole(consoleID, AbstractLogFilter.createFilter(server));
         }
@@ -73,9 +73,9 @@ public class GlassFishConsoleManager {
      * @param server
      * @return
      */
-    public static IPayaraConsole getServerLogFileConsole(GlassFishServer server) {
+    public static IGlassFishConsole getServerLogFileConsole(GlassFishServer server) {
         String consoleID = createServerLogConsoleName(server);
-        IPayaraConsole gfConsole = findConsole(consoleID);
+        IGlassFishConsole gfConsole = findConsole(consoleID);
         if (gfConsole == null) {
             gfConsole = new GlassFishConsole(consoleID, createFilter(server));
         }
@@ -84,14 +84,14 @@ public class GlassFishConsoleManager {
     }
 
     /**
-     * Creates new startup process console. There should be only one for a particular Payara server.
+     * Creates new startup process console. There should be only one for a particular GlassFish server.
      *
      * @param server
      * @return
      */
-    public static IPayaraConsole getStartupProcessConsole(GlassFishServer server, Process launchProcess) {
+    public static IGlassFishConsole getStartupProcessConsole(GlassFishServer server, Process launchProcess) {
         String consoleID = createStartupProcessConsoleName(server);
-        IPayaraConsole payaraConsole = findConsole(consoleID);
+        IGlassFishConsole payaraConsole = findConsole(consoleID);
         if (payaraConsole == null) {
             payaraConsole = new GlassFishStartupConsole(consoleID, new NoOpFilter());
         }
@@ -101,7 +101,7 @@ public class GlassFishConsoleManager {
 
     public static void removeServerLogFileConsole(GlassFishServer server) {
         String consoleID = createServerLogConsoleName(server);
-        IPayaraConsole payaraConsole = findConsole(consoleID);
+        IGlassFishConsole payaraConsole = findConsole(consoleID);
         if (payaraConsole != null) {
             manager.removeConsoles(new IConsole[] { payaraConsole });
         }
@@ -121,12 +121,12 @@ public class GlassFishConsoleManager {
         return server.getServer().getName();
     }
 
-    private static IPayaraConsole findConsole(String name) {
+    private static IGlassFishConsole findConsole(String name) {
         IConsole[] existing = manager.getConsoles();
 
         for (IConsole element : existing) {
             if (name.equals(element.getName())) {
-                return (IPayaraConsole) element;
+                return (IGlassFishConsole) element;
             }
         }
 

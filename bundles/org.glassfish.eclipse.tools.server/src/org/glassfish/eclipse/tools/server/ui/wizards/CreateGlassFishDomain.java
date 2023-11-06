@@ -39,7 +39,7 @@ import org.glassfish.eclipse.tools.server.GlassFishServerPlugin;
  *
  */
 
-public class CreatePayaraDomain extends MessageDialog {
+public class CreateGlassFishDomain extends MessageDialog {
 
 	private Text domainName;
 	private Text domainDir;
@@ -53,7 +53,7 @@ public class CreatePayaraDomain extends MessageDialog {
 	public static int DEFAULT_PORT = 8000;
 	public static String DEFAULT_DOMAIN = "domain1";
 
-	public CreatePayaraDomain(Shell parentShell, GlassFishServer payaraServer, GlassFishRuntime runtime) {
+	public CreateGlassFishDomain(Shell parentShell, GlassFishServer payaraServer, GlassFishRuntime runtime) {
 		super(parentShell, GlassfishWizardResources.newDomainTitle,
 				GlassFishServerPlugin.getImage(GlassFishServerPlugin.GF_SERVER_IMG),
 				GlassfishWizardResources.newDomainDescription, CONFIRM,
@@ -99,7 +99,7 @@ public class CreatePayaraDomain extends MessageDialog {
 //                .getServer()
 //                .getRuntime();
 //
-//        ICreatePayaraDomainOp createDomainOperation = ICreatePayaraDomainOp.TYPE.instantiate();
+//        ICreateGlassFishDomainOp createDomainOperation = ICreateGlassFishDomainOp.TYPE.instantiate();
 //
 //        // Set existing domain location
 //        createDomainOperation.setLocation(fromPortableString(runtime.getLocation().toPortableString()));
@@ -114,12 +114,12 @@ public class CreatePayaraDomain extends MessageDialog {
 //                new SapphireWizard<>(
 //                        createDomainOperation,
 //                        context(BaseWizardFragment.class)
-//                                .sdef("org.glassfish.eclipse.tools.server.ui.PayaraUI")
+//                                .sdef("org.glassfish.eclipse.tools.server.ui.GlassFishUI")
 //                                .wizard("new-domain-wizard")));
 //
 //        // If user okay'ed dialog, copy the provided values to our model
 //        if (dlg.open() == OK) {
-//            IPayaraServerModel model = (IPayaraServerModel) context.part().getModelElement();
+//            IGlassFishServerModel model = (IGlassFishServerModel) context.part().getModelElement();
 //
 //            model.setDomainPath(createDomainOperation.getDomainDir().content().append(createDomainOperation.getName().content()));
 //            model.setDebugPort(createDomainOperation.getPortBase().content() + 9);
@@ -178,7 +178,7 @@ public class CreatePayaraDomain extends MessageDialog {
 
 				File f = new File(domainDir.getText(), domainName.getText());
 				if (!f.exists()) {
-					setMessage("Error in creating the Payara Server domain");
+					setMessage("Error in creating the GlassFish Server domain");
 					return false;
 				}
 			} catch (CoreException ioe) {

@@ -179,7 +179,7 @@ public class GlassFishServerPlugin extends AbstractUIPlugin {
 
     public static void logMessage(String message) {
         if (getInstance().getPreferenceStore().getBoolean(ENABLE_LOG)) {
-            log(new Status(INFO, SYMBOLIC_NAME, 1, "Payara: " + message, null));
+            log(new Status(INFO, SYMBOLIC_NAME, 1, "GlassFish: " + message, null));
         }
     }
 

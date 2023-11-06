@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Payara Server Tools
+Bundle-Name: GlassFish Server Tools
 Bundle-SymbolicName: org.glassfish.eclipse.tools.server;singleton:=true
 Bundle-Version: 2.3.0
 Bundle-ClassPath: .
 Bundle-Localization: plugin
 Bundle-Activator: org.glassfish.eclipse.tools.server.GlassFishServerPlugin
-Bundle-Vendor: Payara
+Bundle-Vendor: GlassFish
 Require-Bundle: 
  org.eclipse.emf.codegen,
  org.eclipse.jst.server.core,

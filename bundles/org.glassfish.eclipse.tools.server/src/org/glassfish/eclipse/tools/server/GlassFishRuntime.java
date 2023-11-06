@@ -21,12 +21,12 @@ package org.glassfish.eclipse.tools.server;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 import static org.eclipse.core.runtime.Status.OK_STATUS;
 import static org.eclipse.osgi.util.NLS.bind;
-import static org.glassfish.eclipse.tools.server.Messages.notValidPayaraInstall;
+import static org.glassfish.eclipse.tools.server.Messages.notValidGlassFishInstall;
 import static org.glassfish.eclipse.tools.server.Messages.pathDoesNotExist;
 import static org.glassfish.eclipse.tools.server.Messages.runtimeNotValid;
 import static org.glassfish.eclipse.tools.server.Messages.unsupportedVersion;
 import static org.glassfish.eclipse.tools.server.GlassFishServerPlugin.SYMBOLIC_NAME;
-import static org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils.find;
+import static org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils.find;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
@@ -40,13 +40,13 @@ import org.eclipse.jst.server.core.internal.IGenericRuntimeWorkingCopy;
 import org.eclipse.wst.server.core.IRuntimeType;
 import org.eclipse.wst.server.core.ServerCore;
 import org.eclipse.wst.server.core.model.RuntimeDelegate;
-import org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils;
+import org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils;
 import org.glassfish.eclipse.tools.server.utils.Version;
 import org.glassfish.eclipse.tools.server.utils.VersionConstraint;
 
 /**
  * This class represents the specific type of runtime associated with the server that we implement;
- * Payara / GlassFish.
+ * GlassFish / GlassFish.
  *
  * <p>
  * A few methods from RuntimeDelegate are overridden here, while a whole slew of central runtime
@@ -153,7 +153,7 @@ public final class GlassFishRuntime extends RuntimeDelegate implements IJavaRunt
     // #### Static methods
 
     public static String createDefaultRuntimeName(Version version) {
-        String baseName = "Payara Server"; // TODO: - detect GF
+        String baseName = "GlassFish Server"; // TODO: - detect GF
 
         if (version != null) {
         	if (version.matches("[6-7)")) {
@@ -203,7 +203,7 @@ public final class GlassFishRuntime extends RuntimeDelegate implements IJavaRunt
         IPath location = getRuntime().getLocation();
 
         if (location != null) {
-            PayaraLocationUtils payaraInstall = find(location.toFile());
+            GlassFishLocationUtils payaraInstall = find(location.toFile());
 
             if (payaraInstall != null) {
                 return payaraInstall.version();
@@ -265,7 +265,7 @@ public final class GlassFishRuntime extends RuntimeDelegate implements IJavaRunt
         }
 
         if (find(location.toFile()) == null) {
-            return new Status(ERROR, SYMBOLIC_NAME, notValidPayaraInstall);
+            return new Status(ERROR, SYMBOLIC_NAME, notValidGlassFishInstall);
         }
 
         return OK_STATUS;

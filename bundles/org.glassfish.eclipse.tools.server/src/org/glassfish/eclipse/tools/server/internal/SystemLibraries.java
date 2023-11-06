@@ -22,7 +22,7 @@ import org.glassfish.eclipse.tools.server.utils.Version;
 
 /**
  * This class supplies all the libraries that will be contributed to the classpath
- * when Payara is used as a target runtime.
+ * when GlassFish is used as a target runtime.
  *
  * <p>
  * This is typically only used for Eclipse proprietary projects. Maven projects for instance

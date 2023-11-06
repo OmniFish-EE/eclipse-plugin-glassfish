@@ -28,7 +28,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.server.core.IServer;
 import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
 
-public class ViewAdminConsoleHandler extends AbstractPayaraSelectionHandler {
+public class ViewAdminConsoleHandler extends AbstractGlassFishSelectionHandler {
 
     @Override
     public void processSelection(IServer server) {

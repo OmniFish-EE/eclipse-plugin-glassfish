@@ -48,7 +48,7 @@ import static org.glassfish.eclipse.tools.server.sdk.server.parser.TreeParser.re
 import static org.glassfish.eclipse.tools.server.utils.ModuleUtil.isEARModule;
 import static org.glassfish.eclipse.tools.server.utils.ModuleUtil.isEJBModule;
 import static org.glassfish.eclipse.tools.server.utils.ModuleUtil.isWebModule;
-import static org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils.find;
+import static org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils.find;
 import static org.glassfish.eclipse.tools.server.utils.Utils.canWrite;
 import static org.glassfish.eclipse.tools.server.utils.Utils.getAppWebContextRoot;
 import static org.glassfish.eclipse.tools.server.utils.Utils.getHttpListenerProtocol;
@@ -98,11 +98,11 @@ import org.glassfish.eclipse.tools.server.sdk.server.parser.HttpData;
 import org.glassfish.eclipse.tools.server.sdk.server.parser.HttpListenerReader;
 import org.glassfish.eclipse.tools.server.sdk.server.parser.NetworkListenerReader;
 import org.glassfish.eclipse.tools.server.sdk.server.parser.TargetConfigNameReader;
-import org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils;
+import org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils;
 import org.glassfish.eclipse.tools.server.utils.Version;
 
 /**
- * This class represents the specific type of server that we implement; Payara /
+ * This class represents the specific type of server that we implement; GlassFish /
  * GlassFish.
  *
  * <p>
@@ -254,7 +254,7 @@ public final class GlassFishServer extends ServerDelegate implements IURLProvide
 			if (readServerConfiguration(
 					new File(getDomainsFolder() + separator + getDomainName() + "/config/domain.xml"))) { //$NON-NLS-1$
 
-				logMessage("In Payara initialize done readServerConfiguration"); //$NON-NLS-1$
+				logMessage("In GlassFish initialize done readServerConfiguration"); //$NON-NLS-1$
 
 				syncHostAndPortsValues();
 
@@ -268,7 +268,7 @@ public final class GlassFishServer extends ServerDelegate implements IURLProvide
 
 				// firePropertyChangeEvent(DOMAINUPDATE, null, null);
 			} else {
-				logMessage("In Payara could not readServerConfiguration - probably invalid domain"); //$NON-NLS-1$
+				logMessage("In GlassFish could not readServerConfiguration - probably invalid domain"); //$NON-NLS-1$
 			}
 		}
 	}
@@ -625,7 +625,7 @@ public final class GlassFishServer extends ServerDelegate implements IURLProvide
 		final IPath location = getServer().getRuntime().getLocation();
 
 		if (location != null) {
-			PayaraLocationUtils payaraInstall = find(location.toFile());
+			GlassFishLocationUtils payaraInstall = find(location.toFile());
 
 			if (payaraInstall != null) {
 				return payaraInstall.version();

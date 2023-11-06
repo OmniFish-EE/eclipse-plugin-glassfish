@@ -74,7 +74,7 @@ import org.eclipse.wst.server.core.model.ServerDelegate;
 import org.glassfish.eclipse.tools.server.GlassFishServer;
 import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
 import org.glassfish.eclipse.tools.server.exceptions.HttpPortUpdateException;
-import org.glassfish.eclipse.tools.server.log.IPayaraConsole;
+import org.glassfish.eclipse.tools.server.log.IGlassFishConsole;
 import org.glassfish.eclipse.tools.server.sdk.admin.ResultProcess;
 import org.glassfish.eclipse.tools.server.sdk.server.FetchLogPiped;
 import org.glassfish.eclipse.tools.server.sdk.server.ServerTasks.StartMode;
@@ -134,7 +134,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
                     Display.getDefault().asyncExec(() -> openError(
                             Display.getDefault().getActiveShell(),
                             "Error",
-                            "Error attaching to Payara Server. Please make sure the server is started in debug mode."));
+                            "Error attaching to GlassFish Server. Please make sure the server is started in debug mode."));
 
                     logError("Not able to attach debugger, running in normal mode", e);
 
@@ -178,7 +178,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
     public ResultProcess launchServer(GlassFishServerBehaviour serverBehavior, StartupArgsImpl payaraStartArguments, StartMode launchMode, IProgressMonitor monitor, ILaunchConfiguration configuration, ILaunch launch) throws TimeoutException, InterruptedException, ExecutionException, HttpPortUpdateException {
         serverBehavior.setGlassFishServerState(STATE_STARTING);
 
-        ResultProcess process = waitForPayaraStarted(
+        ResultProcess process = waitForGlassFishStarted(
             serverBehavior,
             asyncJobsService.submit(new GlassFishStartJob(
                 serverBehavior,
@@ -192,7 +192,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
         return process;
     }
 
-    private ResultProcess waitForPayaraStarted(GlassFishServerBehaviour serverBehavior, Future<ResultProcess> futureProcess, IProgressMonitor monitor) throws TimeoutException, InterruptedException, ExecutionException {
+    private ResultProcess waitForGlassFishStarted(GlassFishServerBehaviour serverBehavior, Future<ResultProcess> futureProcess, IProgressMonitor monitor) throws TimeoutException, InterruptedException, ExecutionException {
         long endTime = System.currentTimeMillis() + (serverBehavior.getServer().getStartTimeout() * 1000);
 
         while (System.currentTimeMillis() < endTime) {
@@ -210,7 +210,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
             }
         }
 
-        throw new TimeoutException("Timeout while waiting for Payara to start");
+        throw new TimeoutException("Timeout while waiting for GlassFish to start");
     }
 
     @Override
@@ -263,7 +263,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
             payaraProcess = process.getValue().getProcess();
             launch.setAttribute(ATTR_CAPTURE_OUTPUT, "false");
 
-            new RuntimeProcess(launch, payaraProcess, "Payara Application Server", null);
+            new RuntimeProcess(launch, payaraProcess, "GlassFish Application Server", null);
         } catch (TimeoutException e) {
             abort("Unable to start server on time.", e);
         } catch (ExecutionException e) {
@@ -386,7 +386,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
                     e.printStackTrace();
                 }
 
-                IPayaraConsole console = getStandardConsole(serverAdapter);
+                IGlassFishConsole console = getStandardConsole(serverAdapter);
                 showConsole(console);
                 if (!console.isLogging()) {
                     console.startLogging(FetchLogPiped.create(serverAdapter, true));

@@ -27,7 +27,7 @@ import org.eclipse.wst.server.ui.IServerModule;
 import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
 
 /**
- * This action opens an assembled module (e.g. a .war archive or exploded folder) that's deployed to a Payara server
+ * This action opens an assembled module (e.g. a .war archive or exploded folder) that's deployed to a GlassFish server
  * in the file browser from the operating system.
  *
  * <p>

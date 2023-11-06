@@ -39,7 +39,7 @@ import org.glassfish.eclipse.tools.server.serverview.AppDesc;
  * <p>
  *
  * <pre>
- * Payara 5 [domain1]
+ * GlassFish 5 [domain1]
  * |- GlassFish Management
  *     |-Resources
  *     |-Deployed Applications
@@ -51,7 +51,7 @@ import org.glassfish.eclipse.tools.server.serverview.AppDesc;
  * </p>
  *
  * <p>
- * Payara / GlassFish is dynamically queried for this list, hence it can only be retrieved for a
+ * GlassFish / GlassFish is dynamically queried for this list, hence it can only be retrieved for a
  * running server. </>
  *
  * @author Ludovic Champenois
@@ -86,19 +86,19 @@ public class ApplicationNode extends TreeNode {
         PropertyDescriptor pd;
 
         pd = new TextPropertyDescriptor("contextroot", "context root");
-        pd.setCategory("Payara Applications");
+        pd.setCategory("GlassFish Applications");
         properties.add(pd);
 
         pd = new TextPropertyDescriptor("name", "name");
-        pd.setCategory("Payara Applications");
+        pd.setCategory("GlassFish Applications");
         properties.add(pd);
 
         pd = new TextPropertyDescriptor("path", "path");
-        pd.setCategory("Payara Applications");
+        pd.setCategory("GlassFish Applications");
         properties.add(pd);
 
         pd = new TextPropertyDescriptor("engine", "engine");
-        pd.setCategory("Payara Applications");
+        pd.setCategory("GlassFish Applications");
         properties.add(pd);
 
         return properties.toArray(new IPropertyDescriptor[0]);

@@ -61,11 +61,11 @@ public class ConfigBuilderProvider {
      */
     public static URL getBuilderConfig(final Version version) {
         if (version.matches("[6")) {
-            return ConfigBuilderProvider.class.getResource("PayaraV6.xml");
+            return ConfigBuilderProvider.class.getResource("GlassFishV6.xml");
         } else if (version.matches("[5")) {
-            return ConfigBuilderProvider.class.getResource("PayaraV5.xml");
+            return ConfigBuilderProvider.class.getResource("GlassFishV5.xml");
         } else {
-            return ConfigBuilderProvider.class.getResource("PayaraV4.xml");
+            return ConfigBuilderProvider.class.getResource("GlassFishV4.xml");
         }
     }
 

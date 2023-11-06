@@ -37,11 +37,11 @@ public class PatternLogFilterV4 extends AbstractLogFilter {
 
     private static final Pattern endOfMessagePattern = Pattern.compile("^//s*[^//]]{2}\\s$"); // log message
 
-    private boolean hasProcessedPayara;
+    private boolean hasProcessedGlassFish;
 
     @Override
-    public boolean hasProcessedPayara() {
-        return hasProcessedPayara;
+    public boolean hasProcessedGlassFish() {
+        return hasProcessedGlassFish;
     }
 
     PatternLogFilterV4() {
@@ -62,7 +62,7 @@ public class PatternLogFilterV4 extends AbstractLogFilter {
                 record.setMessage(m.group(9));
                 result = formatter.formatLogRecord(record);
                 reset();
-                hasProcessedPayara = true;
+                hasProcessedGlassFish = true;
             } else if (!isReadingUserMessage()) {
                 GlassFishServerPlugin.logMessage("Log record that does not match expected format detected!");
                 GlassFishServerPlugin.logMessage(buffer.toString());

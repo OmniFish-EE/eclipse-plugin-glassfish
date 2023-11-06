@@ -35,7 +35,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.server.core.IServer;
 
-public abstract class AbstractPayaraSelectionHandler extends AbstractHandler {
+public abstract class AbstractGlassFishSelectionHandler extends AbstractHandler {
 
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -59,7 +59,7 @@ public abstract class AbstractPayaraSelectionHandler extends AbstractHandler {
     }
 
     protected void showMessageDialog() {
-        showMessageDialog("Payara Server has to be up and running...\nPlease start the server.");
+        showMessageDialog("GlassFish Server has to be up and running...\nPlease start the server.");
     }
 
     protected void showMessageDialog(String msg) {

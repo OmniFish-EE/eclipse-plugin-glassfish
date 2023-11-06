@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Payara Server Redeploy Command Entity.
+ * GlassFish Server Redeploy Command Entity.
  * <p>
  * Holds data for command. Objects of this class are created by API user.
  * <p>
@@ -71,11 +71,11 @@ public class CommandRedeploy extends CommandTargetName {
 	////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Constructs an instance of Payara server deploy command entity.
+	 * Constructs an instance of GlassFish server deploy command entity.
 	 * <p/>
 	 *
 	 * @param name            Name of module/cluster/instance to modify.
-	 * @param target          Target Payara instance or cluster where
+	 * @param target          Target GlassFish instance or cluster where
 	 *                        <code>name</code> is stored.
 	 * @param contextRoot     Deployed application context root.
 	 * @param properties      Deployment properties.

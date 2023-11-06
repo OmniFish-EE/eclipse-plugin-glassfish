@@ -35,7 +35,7 @@ public class LogReader implements Runnable {
     private ILogFilter filter;
 
     private boolean hasLogged;
-    private boolean hasProcessedPayara;
+    private boolean hasProcessedGlassFish;
 
     LogReader(FetchLog logFetcher, MessageConsoleStream outputStream, CountDownLatch latch, ILogFilter filter) {
         this.logFetcher = logFetcher;
@@ -53,8 +53,8 @@ public class LogReader implements Runnable {
                 line = filter.process(line);
                 if (line != null) {
                     hasLogged = true;
-                    if (!hasProcessedPayara) {
-                        hasProcessedPayara = filter.hasProcessedPayara();
+                    if (!hasProcessedGlassFish) {
+                        hasProcessedGlassFish = filter.hasProcessedGlassFish();
                     }
                     output.println(line);
                 }
@@ -73,8 +73,8 @@ public class LogReader implements Runnable {
         return hasLogged;
     }
 
-    public synchronized boolean hasProcessedPayara() {
-        return hasProcessedPayara;
+    public synchronized boolean hasProcessedGlassFish() {
+        return hasProcessedGlassFish;
     }
 
     public synchronized void stop() {

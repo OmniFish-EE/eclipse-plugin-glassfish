@@ -25,7 +25,7 @@ import org.glassfish.eclipse.tools.server.sdk.server.config.JavaSESet;
 import org.glassfish.eclipse.tools.server.sdk.server.config.LibraryNode;
 
 /**
- * Payara configuration reader API interface.
+ * GlassFish configuration reader API interface.
  * <p/>
  *
  * @author Peter Benedikovic, Tomas Kraus
@@ -33,34 +33,34 @@ import org.glassfish.eclipse.tools.server.sdk.server.config.LibraryNode;
 public interface GlassFishConfig {
 
     /**
-     * Get Payara libraries configuration.
+     * Get GlassFish libraries configuration.
      * <p/>
      *
-     * @return Payara libraries configuration.
+     * @return GlassFish libraries configuration.
      */
     public List<LibraryNode> getLibrary();
 
     /**
-     * Get Payara Java EE configuration.
+     * Get GlassFish Java EE configuration.
      * <p/>
      *
-     * @return Payara JavaEE configuration.
+     * @return GlassFish JavaEE configuration.
      */
     public JavaEESet getJavaEE();
 
     /**
-     * Get Payara Java SE configuration.
+     * Get GlassFish Java SE configuration.
      * <p/>
      *
-     * @return Payara JavaSE configuration.
+     * @return GlassFish JavaSE configuration.
      */
     public JavaSESet getJavaSE();
 
     /**
-     * Get Payara tools configuration.
+     * Get GlassFish tools configuration.
      * <p/>
      *
-     * @return Payara tools configuration.
+     * @return GlassFish tools configuration.
      */
     public ToolsConfig getTools();
 

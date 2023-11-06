@@ -34,7 +34,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
 import org.glassfish.eclipse.tools.server.exceptions.GlassFishLaunchException;
-import org.glassfish.eclipse.tools.server.log.IPayaraConsole;
+import org.glassfish.eclipse.tools.server.log.IGlassFishConsole;
 import org.glassfish.eclipse.tools.server.sdk.GlassFishIdeException;
 import org.glassfish.eclipse.tools.server.sdk.admin.ResultProcess;
 import org.glassfish.eclipse.tools.server.sdk.server.FetchLogSimple;
@@ -65,20 +65,20 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
         boolean earlyAttach = payaraServerBehaviour.getGlassFishServerDelegate().getAttachDebuggerEarly();
 
         // Create the process that starts the server
-        ResultProcess process = startPayara(earlyAttach);
+        ResultProcess process = startGlassFish(earlyAttach);
 
         Process payaraProcess = process.getValue().getProcess();
 
         // Read process std output to prevent process'es blocking
-        IPayaraConsole startupConsole = startLogging(payaraProcess);
+        IGlassFishConsole startupConsole = startLogging(payaraProcess);
 
-        IPayaraConsole filelogConsole = getStandardConsole(payaraServerBehaviour.getGlassFishServerDelegate());
+        IGlassFishConsole filelogConsole = getStandardConsole(payaraServerBehaviour.getGlassFishServerDelegate());
 
         synchronized (payaraServerBehaviour) {
 
             boolean attached = false;
             boolean hasLogged = false;
-            boolean hasLoggedPayara = false;
+            boolean hasLoggedGlassFish = false;
 
             // Query the process status in a loop
 
@@ -151,15 +151,15 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
                     if (!hasLogged && (startupConsole.hasLogged() || filelogConsole.hasLogged())) {
                         // Something has been logged meaning the JVM of the target
                         // process is activated. Could be JVM logging first
-                        // like "waiting for connection", or the first log line of Payara starting
+                        // like "waiting for connection", or the first log line of GlassFish starting
                         hasLogged = true;
                         checkMonitorAndProgress(monitor, WORK_STEP / 4);
                     }
 
-                    if (!hasLoggedPayara && filelogConsole.hasLoggedPayara()) {
+                    if (!hasLoggedGlassFish && filelogConsole.hasLoggedGlassFish()) {
 
-                        // A Payara logline has been written, meaning Payara is now starting up.
-                        hasLoggedPayara = true;
+                        // A GlassFish logline has been written, meaning GlassFish is now starting up.
+                        hasLoggedGlassFish = true;
                         checkMonitorAndProgress(monitor, WORK_STEP / 4);
                     }
 
@@ -174,18 +174,18 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
         return process;
     }
 
-    private ResultProcess startPayara(boolean earlyAttach) throws GlassFishLaunchException {
+    private ResultProcess startGlassFish(boolean earlyAttach) throws GlassFishLaunchException {
         try {
             // Process the arguments and call the CommandStartDAS command which will initiate
-            // starting the Payara server
+            // starting the GlassFish server
             return startServer(payaraServerBehaviour.getGlassFishServerDelegate(), args, mode, earlyAttach);
         } catch (GlassFishIdeException e) {
             throw new GlassFishLaunchException("Exception in startup library.", e);
         }
     }
 
-    private IPayaraConsole startLogging(Process payaraProcess) {
-        IPayaraConsole startupConsole = getStartupProcessConsole(payaraServerBehaviour.getGlassFishServerDelegate(), payaraProcess);
+    private IGlassFishConsole startLogging(Process payaraProcess) {
+        IGlassFishConsole startupConsole = getStartupProcessConsole(payaraServerBehaviour.getGlassFishServerDelegate(), payaraProcess);
 
         startupConsole.startLogging(
                 new FetchLogSimple(payaraProcess.getInputStream()),

@@ -46,11 +46,11 @@ import org.glassfish.eclipse.tools.server.internal.SystemLibraries;
  * Series of utils related to the location where GlassFish is installed.
  *
  * <p>
- * Primarily supplies the version and the libraries associated with the Payara location.
+ * Primarily supplies the version and the libraries associated with the GlassFish location.
  *
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
-public final class PayaraLocationUtils {
+public final class GlassFishLocationUtils {
 
     public static final String DEFAULT_LIBRARIES = "default";
     public static final String ALL_LIBRARIES = "all";
@@ -62,7 +62,7 @@ public final class PayaraLocationUtils {
     // <runtime-component-type id="glassfish.runtime"/>
     private static final String RUNTIME_COMPONENT_ID = "glassfish.runtime";
 
-    private static final Map<File, SoftReference<PayaraLocationUtils>> CACHE = new HashMap<>();
+    private static final Map<File, SoftReference<GlassFishLocationUtils>> CACHE = new HashMap<>();
 
     private final Version version;
     private final Map<String, List<File>> libraries;
@@ -71,7 +71,7 @@ public final class PayaraLocationUtils {
     // #### static factory / finder methods
 
 
-    public static synchronized PayaraLocationUtils find(IJavaProject project) {
+    public static synchronized GlassFishLocationUtils find(IJavaProject project) {
         if (project != null) {
             return find(project.getProject());
         }
@@ -79,7 +79,7 @@ public final class PayaraLocationUtils {
         return null;
     }
 
-    public static synchronized PayaraLocationUtils find(IProject project) {
+    public static synchronized GlassFishLocationUtils find(IProject project) {
         if (project != null) {
             IFacetedProject facetedProject = null;
 
@@ -87,7 +87,7 @@ public final class PayaraLocationUtils {
                 facetedProject = ProjectFacetsManager.create(project);
             } catch (CoreException e) {
                 // Intentionally ignored. If project isn't faceted or another error occurs,
-                // all that matters is that the Payara install is not found, which is signaled by null
+                // all that matters is that the GlassFish install is not found, which is signaled by null
                 // return.
             }
 
@@ -97,12 +97,12 @@ public final class PayaraLocationUtils {
         return null;
     }
 
-    public static synchronized PayaraLocationUtils find(IFacetedProject project) {
+    public static synchronized GlassFishLocationUtils find(IFacetedProject project) {
         if (project != null) {
             IRuntime primary = project.getPrimaryRuntime();
 
             if (primary != null) {
-                PayaraLocationUtils payaraLocation = find(primary);
+                GlassFishLocationUtils payaraLocation = find(primary);
 
                 if (payaraLocation != null) {
                     return payaraLocation;
@@ -123,10 +123,10 @@ public final class PayaraLocationUtils {
         return null;
     }
 
-    public static synchronized PayaraLocationUtils find(IRuntime runtime) {
+    public static synchronized GlassFishLocationUtils find(IRuntime runtime) {
         if (runtime != null) {
             for (IRuntimeComponent component : runtime.getRuntimeComponents()) {
-                PayaraLocationUtils payaraLocation = find(component);
+                GlassFishLocationUtils payaraLocation = find(component);
 
                 if (payaraLocation != null) {
                     return payaraLocation;
@@ -137,7 +137,7 @@ public final class PayaraLocationUtils {
         return null;
     }
 
-    public static synchronized PayaraLocationUtils find(IRuntimeComponent component) {
+    public static synchronized GlassFishLocationUtils find(IRuntimeComponent component) {
         if (component != null && component.getRuntimeComponentType().getId().equals(RUNTIME_COMPONENT_ID)) {
             String location = component.getProperty("location");
 
@@ -149,19 +149,19 @@ public final class PayaraLocationUtils {
         return null;
     }
 
-    public static synchronized PayaraLocationUtils find(File location) {
+    public static synchronized GlassFishLocationUtils find(File location) {
 
         // Lazily cleanup cache keys
-        for (Iterator<Map.Entry<File, SoftReference<PayaraLocationUtils>>> itr = CACHE.entrySet().iterator(); itr.hasNext();) {
+        for (Iterator<Map.Entry<File, SoftReference<GlassFishLocationUtils>>> itr = CACHE.entrySet().iterator(); itr.hasNext();) {
             if (itr.next().getValue().get() == null) {
                 itr.remove();
             }
         }
 
-        PayaraLocationUtils payaraLocation = null;
+        GlassFishLocationUtils payaraLocation = null;
 
         if (location != null) {
-            SoftReference<PayaraLocationUtils> payaraLocationReference = CACHE.get(location);
+            SoftReference<GlassFishLocationUtils> payaraLocationReference = CACHE.get(location);
 
             if (payaraLocationReference != null) {
                 payaraLocation = payaraLocationReference.get();
@@ -169,7 +169,7 @@ public final class PayaraLocationUtils {
 
             if (payaraLocation == null) {
                 try {
-                    payaraLocation = new PayaraLocationUtils(location);
+                    payaraLocation = new GlassFishLocationUtils(location);
                 } catch (IllegalArgumentException e) {
                     return null;
                 }
@@ -183,9 +183,9 @@ public final class PayaraLocationUtils {
 
 
 
-    // #### PayaraLocation instance methods
+    // #### GlassFishLocation instance methods
 
-    private PayaraLocationUtils(File location) {
+    private GlassFishLocationUtils(File location) {
         checkLocationIsValid(location);
 
         File payaraLocation = location;
@@ -206,8 +206,8 @@ public final class PayaraLocationUtils {
             throw new IllegalArgumentException();
         }
 
-        version = readPayaraVerionFromAPIJar(gfApiJar);
-        libraries = readLibraryFilesFromPayaraLocation(payaraLocation, version);
+        version = readGlassFishVerionFromAPIJar(gfApiJar);
+        libraries = readLibraryFilesFromGlassFishLocation(payaraLocation, version);
     }
 
     public Version version() {
@@ -222,7 +222,7 @@ public final class PayaraLocationUtils {
 
     // #### Private methods
 
-    private Version readPayaraVerionFromAPIJar(File gfApiJar) {
+    private Version readGlassFishVerionFromAPIJar(File gfApiJar) {
         String versionString;
         try {
             versionString = readManifestEntry(gfApiJar, "Bundle-Version");
@@ -240,15 +240,15 @@ public final class PayaraLocationUtils {
     }
 
     /**
-     * Gets the relative file name patterns for the system libraries corresponding to the given Payara
-     * version, and turns these into a list of actual files for the given Payara location on disk.
+     * Gets the relative file name patterns for the system libraries corresponding to the given GlassFish
+     * version, and turns these into a list of actual files for the given GlassFish location on disk.
      *
-     * @param payaraLocation location where Payara is installed
-     * @param payaraVersion version of Payara for which libraries are to be retrieved
+     * @param payaraLocation location where GlassFish is installed
+     * @param payaraVersion version of GlassFish for which libraries are to be retrieved
      *
      * @return list of system libraries as actual files
      */
-    private Map<String, List<File>> readLibraryFilesFromPayaraLocation(File payaraLocation, Version payaraVersion) {
+    private Map<String, List<File>> readLibraryFilesFromGlassFishLocation(File payaraLocation, Version payaraVersion) {
         Map<String, List<File>> librariesPerVariant = new HashMap<>();
 
         librariesPerVariant.put(

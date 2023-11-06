@@ -33,7 +33,7 @@ public interface ILogFilter {
      */
     String process(String line);
 
-    default boolean hasProcessedPayara() {
+    default boolean hasProcessedGlassFish() {
         return false;
     }
 }

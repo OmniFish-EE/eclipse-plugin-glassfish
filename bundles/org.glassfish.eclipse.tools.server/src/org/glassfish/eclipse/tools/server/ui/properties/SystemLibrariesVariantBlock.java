@@ -18,8 +18,8 @@ import static org.eclipse.swt.layout.GridData.BEGINNING;
 import static org.eclipse.swt.layout.GridData.FILL;
 import static org.eclipse.swt.layout.GridData.FILL_HORIZONTAL;
 import static org.glassfish.eclipse.tools.server.ui.properties.ClasspathContainerPage.newComposite;
-import static org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils.ALL_LIBRARIES;
-import static org.glassfish.eclipse.tools.server.utils.PayaraLocationUtils.DEFAULT_LIBRARIES;
+import static org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils.ALL_LIBRARIES;
+import static org.glassfish.eclipse.tools.server.utils.GlassFishLocationUtils.DEFAULT_LIBRARIES;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
@@ -145,7 +145,7 @@ public class SystemLibrariesVariantBlock {
     }
 
     private void firePropertyChange() {
-        PropertyChangeEvent event = new PropertyChangeEvent(this, "Payara library selection", null, selection());
+        PropertyChangeEvent event = new PropertyChangeEvent(this, "GlassFish library selection", null, selection());
         for (IPropertyChangeListener listener : changeListeners) {
             listener.propertyChange(event);
         }

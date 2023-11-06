@@ -21,9 +21,9 @@ package org.glassfish.eclipse.tools.server.sdk.admin;
 import org.glassfish.eclipse.tools.server.GlassFishServer;
 
 /**
- * Payara Server HTTP Command Factory.
+ * GlassFish Server HTTP Command Factory.
  * <p>
- * Selects correct Payara server administration functionality using HTTP command interface.
+ * Selects correct GlassFish server administration functionality using HTTP command interface.
  * <p>
  * Factory is implemented as singleton.
  * <p>
