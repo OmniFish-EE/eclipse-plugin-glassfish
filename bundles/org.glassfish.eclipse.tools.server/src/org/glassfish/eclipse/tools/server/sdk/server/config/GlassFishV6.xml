@@ -3,7 +3,6 @@
     <tools lib="lib">
         <asadmin jar="client/appserver-cli.jar"/>
     </tools>
-    
     <java version="17">
         <platform version="11"/>
         <platform version="12"/>
@@ -12,19 +11,13 @@
         <platform version="15"/>
         <platform version="16"/>
         <platform version="17"/>
-        <platform version="18"/>
-        <platform version="19"/>
-        <platform version="20"/>
-        <platform version="21"/>
     </java>
     
-    <javaee version="10.0.0">
+    <javaee version="9.1.0">
         <profile version="9.0.0" type="web"/>
         <profile version="9.0.0" type="full" check="full"/>
         <profile version="9.1.0" type="web"/>
         <profile version="9.1.0" type="full" check="full"/>
-        <profile version="10.0.0" type="web"/>
-        <profile version="10.0.0" type="full" check="full"/>
         <module type="war"/>
         <module type="car" check="full"/>
         <module type="ear" check="full"/>
@@ -51,18 +44,6 @@
         </classpath>
         <javadocs>
             <lookup path="docs/jakartaee10-doc-api.jar"/>
-        </javadocs>
-        <sources>
-        </sources>
-    </library>
-    
-    <library id="MicroProfile">
-        <classpath>
-            <fileset dir="modules">
-                <include name="microprofile.*\-api.jar"/>
-            </fileset>
-        </classpath>
-        <javadocs>
         </javadocs>
         <sources>
         </sources>

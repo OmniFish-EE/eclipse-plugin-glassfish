@@ -381,10 +381,6 @@ public final class GlassFishServer extends ServerDelegate implements IURLProvide
 				return new Status(ERROR, SYMBOLIC_NAME, invalidPortNumbers);
 			}
 
-			// refresh model
-//            getModel().setAdminPort(getAdminPort());
-//            getModel().setServerPort(getPort());
-
 		}
 
 		return OK_STATUS;

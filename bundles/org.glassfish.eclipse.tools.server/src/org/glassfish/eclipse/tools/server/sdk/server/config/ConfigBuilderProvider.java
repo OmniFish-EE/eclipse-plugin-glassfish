@@ -65,6 +65,10 @@ public class ConfigBuilderProvider {
             return ConfigBuilderProvider.class.getResource("GlassFishV7.xml");
         }
         
+        if (version.matches("[6")) {
+            return ConfigBuilderProvider.class.getResource("GlassFishV5.xml");
+        }
+        
         if (version.matches("[5")) {
             return ConfigBuilderProvider.class.getResource("GlassFishV5.xml");
         }

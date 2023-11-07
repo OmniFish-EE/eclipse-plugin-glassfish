@@ -74,6 +74,8 @@ public final class GlassFishRuntime extends RuntimeDelegate implements IJavaRunt
     private static final VersionConstraint VERSION_CONSTRAINT_4 = new VersionConstraint("[1.7");
     private static final VersionConstraint VERSION_CONSTRAINT_5 = new VersionConstraint("[1.8");
     private static final VersionConstraint VERSION_CONSTRAINT_6 = new VersionConstraint("[1.8");
+    private static final VersionConstraint VERSION_CONSTRAINT_7 = new VersionConstraint("[11");
+    
     protected static final String PROP_VM_INSTALL_TYPE_ID = "vm-install-type-id";
     protected static final String PROP_VM_INSTALL_ID = "vm-install-id";
 
@@ -221,7 +223,7 @@ public final class GlassFishRuntime extends RuntimeDelegate implements IJavaRunt
             return new Status(ERROR, SYMBOLIC_NAME, runtimeNotValid);
         }
 
-        if (!version.matches("[3.1-7)")) {
+        if (!version.matches("[3.1-8)")) {
             return new Status(ERROR, SYMBOLIC_NAME, unsupportedVersion);
         }
 
@@ -232,6 +234,10 @@ public final class GlassFishRuntime extends RuntimeDelegate implements IJavaRunt
         Version version = getVersion();
 
         if (version != null) {
+        	if (version.matches("[7")) {
+                return VERSION_CONSTRAINT_7;
+            }
+        	
             if (version.matches("[6")) {
                 return VERSION_CONSTRAINT_6;
             }

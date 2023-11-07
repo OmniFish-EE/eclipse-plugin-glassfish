@@ -259,6 +259,7 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 		}
 	}
 
+	// TODO: now simply adds all JREs
 	protected void updateJREs(JdkFilter jdkFilter) {
 		// get all installed JVMs
 		installedJREs = new ArrayList<>();
