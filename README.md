@@ -1,2 +1,2 @@
-# OmniFish GlassFish Tools for Eclipse
+# OmniFish tools for Eclipse GlassFish
 
