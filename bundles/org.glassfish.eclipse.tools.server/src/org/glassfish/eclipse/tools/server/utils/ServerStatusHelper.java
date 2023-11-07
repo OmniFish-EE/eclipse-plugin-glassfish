@@ -70,9 +70,9 @@ public class ServerStatusHelper {
         if (server.isRemote()) {
             IServer server1 = server.getServer();
             String remoteServerVersion = GlassFishServerBehaviour.getVersion(server);
-            GlassFishRuntime payaraRuntime = (GlassFishRuntime) server1.getRuntime().loadAdapter(GlassFishRuntime.class, null);
+            GlassFishRuntime glassfishRuntime = (GlassFishRuntime) server1.getRuntime().loadAdapter(GlassFishRuntime.class, null);
 
-            String thisServerVersion = payaraRuntime.getVersion().toString();
+            String thisServerVersion = glassfishRuntime.getVersion().toString();
             int n = thisServerVersion.indexOf(".X");
 
             if (n > 0) {

@@ -88,7 +88,7 @@ public final class GlassFishRuntimeLocatorDelegate extends RuntimeLocatorDelegat
         final RuntimeWorkingCopy rwc = (RuntimeWorkingCopy) created;
 
         final Map<String, String> props = new HashMap<>();
-        props.put("payara.rootdirectory", rwc.getLocation().toPortableString());
+        props.put("glassfish.rootdirectory", rwc.getLocation().toPortableString());
         rwc.setAttribute("generic_server_instance_properties", props);
 
         final GlassFishRuntime gf = (GlassFishRuntime) rwc.loadAdapter(GlassFishRuntime.class, null);

@@ -1,4 +1,8 @@
-Eclipse GlassFish Tools
+OmniFish GlassFish Tools
+
+This project is based on Payara tools:
+
+Originally developed based on Eclipse GlassFish tools and donated to Payara by Arjan Tijms.
 
 This project is based on the Eclipse GlassFish tools:
 
@@ -20,6 +24,7 @@ Copyright (c) 2018 Oracle
 == Additional Copyright holders
 
 Copyright (c) 2018 XXXXX Foundation
+Copyright (c) 2023 OmniFish
 
 This project contains icons based on the org.eclipse.images
 

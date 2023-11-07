@@ -53,16 +53,16 @@ import org.glassfish.eclipse.tools.server.deploying.GlassFishServerBehaviour;
 public class TestRemoteGlassFishConnectionAction {
 
     protected Object run(IServerWorkingCopy wc) {
-        GlassFishServer payaraServer = load(wc, GlassFishServer.class);
+        GlassFishServer glassfishServer = load(wc, GlassFishServer.class);
 
-        ServerStatus serverStatus = checkServerStatus(payaraServer);
+        ServerStatus serverStatus = checkServerStatus(glassfishServer);
 
         if (!serverStatus.equals(RUNNING_DOMAIN_MATCHING)) {
             StringBuilder errorMessage = new StringBuilder();
             errorMessage.append("Cannot communicate with ")
-                    .append(payaraServer.getServer().getHost())
+                    .append(glassfishServer.getServer().getHost())
                     .append(":")
-                    .append(payaraServer.getAdminPort())
+                    .append(glassfishServer.getAdminPort())
                     .append(" remote server.");
 
             // Give some hints
@@ -89,7 +89,7 @@ public class TestRemoteGlassFishConnectionAction {
 
             // Check server version
 
-            String remoteServerVersion = GlassFishServerBehaviour.getVersion(payaraServer);
+            String remoteServerVersion = GlassFishServerBehaviour.getVersion(glassfishServer);
             String thisServerVersion = wc.getRuntime()
                     .getAdapter(GlassFishRuntime.class)
                     .getVersion()

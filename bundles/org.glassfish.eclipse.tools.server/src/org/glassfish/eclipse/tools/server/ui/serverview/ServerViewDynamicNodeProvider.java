@@ -57,20 +57,20 @@ public class ServerViewDynamicNodeProvider extends BaseContentProvider implement
 
             if ((is31x && server.getServerState() == STATE_STARTED)) {
 
-                GlassFishServer payaraServer = load(server, GlassFishServer.class);
+                GlassFishServer glassfishServer = load(server, GlassFishServer.class);
 
-                if (payaraServer != null) {
+                if (glassfishServer != null) {
 
                     TreeNode root = new TreeNode(GLASSFISH_MANAGEMENT, GLASSFISH_MANAGEMENT);
 
                     // Deployed Applications Node
-                    root.addChild(new DeployedApplicationsNode(payaraServer));
+                    root.addChild(new DeployedApplicationsNode(glassfishServer));
 
                     // Resources Node
-                    root.addChild(new ResourcesNode(payaraServer));
+                    root.addChild(new ResourcesNode(glassfishServer));
 
                     // Deployed web-services node
-                    root.addChild(new DeployedWebServicesNode(payaraServer));
+                    root.addChild(new DeployedWebServicesNode(glassfishServer));
 
                     return new Object[] { root };
                 }

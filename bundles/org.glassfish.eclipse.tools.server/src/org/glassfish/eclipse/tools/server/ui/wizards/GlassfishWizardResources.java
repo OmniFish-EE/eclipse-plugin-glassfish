@@ -32,7 +32,7 @@ public class GlassfishWizardResources extends org.eclipse.osgi.util.NLS {
     public static String instanceType;
     public static String hostLocation;
     public static String containerLocation;
-    public static String payaraLocation;
+    public static String glassfishLocation;
     public static String installedJRE;
     public static String installedJREs;
     public static String runtimeDefaultJRE;

@@ -148,31 +148,31 @@ public final class GlassFishServerConfigServices {
 //                    .property()
 //                    .nearest(IGlassFishRuntimeModel.class);
 //
-//            Version payaraVersion = null;
+//            Version glassfishVersion = null;
 //
-//            Path payaraRootLocation = model.getServerRoot().content();
+//            Path glassfishRootLocation = model.getServerRoot().content();
 //
-//            if (payaraRootLocation != null) {
-//                GlassFishLocationUtils payaraInstall = find(payaraRootLocation.toFile());
+//            if (glassfishRootLocation != null) {
+//                GlassFishLocationUtils glassfishInstall = find(glassfishRootLocation.toFile());
 //
-//                if (payaraInstall == null) {
+//                if (glassfishInstall == null) {
 //                    for (Path subFolder : subFoldersToSearch) {
-//                        Path potentialRootLocation = payaraRootLocation.append(subFolder);
-//                        payaraInstall = GlassFishLocationUtils.find(potentialRootLocation.toFile());
+//                        Path potentialRootLocation = glassfishRootLocation.append(subFolder);
+//                        glassfishInstall = GlassFishLocationUtils.find(potentialRootLocation.toFile());
 //
-//                        if (payaraInstall != null) {
+//                        if (glassfishInstall != null) {
 //                            model.setServerRoot(potentialRootLocation);
 //                            break;
 //                        }
 //                    }
 //                }
 //
-//                if (payaraInstall != null) {
-//                    payaraVersion = payaraInstall.version();
+//                if (glassfishInstall != null) {
+//                    glassfishVersion = glassfishInstall.version();
 //                }
 //            }
 //
-//            model.setName(createDefaultRuntimeName(payaraVersion));
+//            model.setName(createDefaultRuntimeName(glassfishVersion));
 //        }
 //    }
 

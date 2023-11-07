@@ -31,16 +31,16 @@ public class GlassFishConsoleTracker implements IPatternMatchListenerDelegate {
     /**
      * The console associated with this line tracker
      */
-    private TextConsole payaraConsole;
+    private TextConsole glassfishConsole;
 
     @Override
     public void connect(TextConsole console) {
-        payaraConsole = console;
+        glassfishConsole = console;
     }
 
     @Override
     public void disconnect() {
-        payaraConsole = null;
+        glassfishConsole = null;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class GlassFishConsoleTracker implements IPatternMatchListenerDelegate {
         try {
             int offset = event.getOffset();
             int length = event.getLength();
-            IHyperlink link = new JavaStackTraceHyperlink(payaraConsole);
-            payaraConsole.addHyperlink(link, offset + 1, length - 2);
+            IHyperlink link = new JavaStackTraceHyperlink(glassfishConsole);
+            glassfishConsole.addHyperlink(link, offset + 1, length - 2);
         } catch (BadLocationException e) {
             // Ignore
         }

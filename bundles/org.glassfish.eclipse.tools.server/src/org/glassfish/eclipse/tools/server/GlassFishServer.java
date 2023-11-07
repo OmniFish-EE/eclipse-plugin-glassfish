@@ -363,11 +363,11 @@ public final class GlassFishServer extends ServerDelegate implements IURLProvide
 				}
 
 				if (server.getServerType() == this.getServer().getServerType()) {
-					GlassFishServer payaraServer = (GlassFishServer) server.loadAdapter(GlassFishServer.class, null);
+					GlassFishServer glassfishServer = (GlassFishServer) server.loadAdapter(GlassFishServer.class, null);
 					File otherDomainPath = new File(getDomainPath());
-					File payaraDomainPath = new File(payaraServer.getDomainPath());
+					File glassfishDomainPath = new File(glassfishServer.getDomainPath());
 
-					if (otherDomainPath.equals(payaraDomainPath)) {
+					if (otherDomainPath.equals(glassfishDomainPath)) {
 						return new Status(ERROR, SYMBOLIC_NAME, serverWithSameDomainPathExisting);
 					}
 				}
@@ -625,10 +625,10 @@ public final class GlassFishServer extends ServerDelegate implements IURLProvide
 		final IPath location = getServer().getRuntime().getLocation();
 
 		if (location != null) {
-			GlassFishLocationUtils payaraInstall = find(location.toFile());
+			GlassFishLocationUtils glassfishInstall = find(location.toFile());
 
-			if (payaraInstall != null) {
-				return payaraInstall.version();
+			if (glassfishInstall != null) {
+				return glassfishInstall.version();
 			}
 		}
 

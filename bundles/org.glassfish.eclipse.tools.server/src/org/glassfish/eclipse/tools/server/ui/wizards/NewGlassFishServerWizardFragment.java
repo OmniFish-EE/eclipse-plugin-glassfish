@@ -144,8 +144,8 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		handle.setTitle(getTitle());
 		handle.setDescription(getDescription());
 
-		GlassFishServer payaraServer = getServer().getAdapter(GlassFishServer.class);
-		payaraServer.setDomainPath(getDefaultDomainDir(getServer().getRuntime().getLocation()).toOSString());
+		GlassFishServer glassfishServer = getServer().getAdapter(GlassFishServer.class);
+		glassfishServer.setDomainPath(getDefaultDomainDir(getServer().getRuntime().getLocation()).toOSString());
 
 		createContent(container, handle);
 
@@ -160,7 +160,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 	}
 
 	public void createContent(Composite parent, IWizardHandle handle) {
-		GlassFishServer payaraServer = getServer().getAdapter(GlassFishServer.class);
+		GlassFishServer glassfishServer = getServer().getAdapter(GlassFishServer.class);
 
 		GridLayout layout = new GridLayout(1, true);
 		parent.setLayout(layout);
@@ -214,11 +214,11 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		domainLocation = new Text(group, SWT.BORDER);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		domainLocation.setLayoutData(data);
-		domainLocation.setText(payaraServer.getDomainPath());
+		domainLocation.setText(glassfishServer.getDomainPath());
 		domainLocation.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				payaraServer.setDomainPath(domainLocation.getText());
+				glassfishServer.setDomainPath(domainLocation.getText());
 				updateServerName();
 				validate(handle);
 			}
@@ -245,7 +245,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 			@Override
 			public void widgetSelected(SelectionEvent se) {
 				GlassFishRuntime runtime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
-				CreateGlassFishDomain domain = new CreateGlassFishDomain(parent.getShell(), payaraServer, runtime);
+				CreateGlassFishDomain domain = new CreateGlassFishDomain(parent.getShell(), glassfishServer, runtime);
 				domain.open();
 				String selectedDirectory = domain.getPath();
 				if (selectedDirectory != null && !selectedDirectory.isEmpty()) {
@@ -271,9 +271,9 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		adminName.setLayoutData(data);
-		adminName.setText(payaraServer.getAdminUser());
+		adminName.setText(glassfishServer.getAdminUser());
 		adminName.addModifyListener(e -> {
-			payaraServer.setAdminUser(adminName.getText());
+			glassfishServer.setAdminUser(adminName.getText());
 			validate(handle);
 		});
 
@@ -287,14 +287,14 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		adminPassword.setLayoutData(data);
-		adminPassword.setText(payaraServer.getAdminPassword());
+		adminPassword.setText(glassfishServer.getAdminPassword());
 		adminPassword.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
 //				IServerWorkingCopy copy = getServer();
 //				GlassFishServer ps = getServer().getAdapter(GlassFishServer.class);
 //				IRuntimeWorkingCopy c2 = getServerRuntime();
-				payaraServer.setAdminPassword(adminPassword.getText());
+				glassfishServer.setAdminPassword(adminPassword.getText());
 			}
 		});
 
@@ -311,11 +311,11 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		debugPort.setLayoutData(data);
-		debugPort.setSelection(payaraServer.getDebugPort());
+		debugPort.setSelection(glassfishServer.getDebugPort());
 		debugPort.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				payaraServer.setDebugPort(debugPort.getSelection());
+				glassfishServer.setDebugPort(debugPort.getSelection());
 			}
 		});
 
@@ -330,11 +330,11 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		keepSessions.setLayoutData(data);
-		keepSessions.setSelection(payaraServer.getKeepSessions());
+		keepSessions.setSelection(glassfishServer.getKeepSessions());
 		keepSessions.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent se) {
-				payaraServer.setKeepSessions(keepSessions.getSelection());
+				glassfishServer.setKeepSessions(keepSessions.getSelection());
 			}
 		});
 
@@ -343,11 +343,11 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		jarDeploy.setLayoutData(data);
-		jarDeploy.setSelection(payaraServer.getJarDeploy());
+		jarDeploy.setSelection(glassfishServer.getJarDeploy());
 		jarDeploy.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent se) {
-				payaraServer.setJarDeploy(jarDeploy.getSelection());
+				glassfishServer.setJarDeploy(jarDeploy.getSelection());
 			}
 		});
 
@@ -367,19 +367,19 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		restartPattern.setLayoutData(data);
-		restartPattern.setText(payaraServer.getRestartPattern());
-		restartPattern.addModifyListener(e -> payaraServer.setRestartPattern(restartPattern.getText()));
+		restartPattern.setText(glassfishServer.getRestartPattern());
+		restartPattern.addModifyListener(e -> glassfishServer.setRestartPattern(restartPattern.getText()));
 
 		hotDeploy = new Button(group, SWT.CHECK);
 		hotDeploy.setText(GlassfishWizardResources.enableHotDeploy);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		hotDeploy.setLayoutData(data);
-		hotDeploy.setSelection(payaraServer.getHotDeploy());
+		hotDeploy.setSelection(glassfishServer.getHotDeploy());
 		hotDeploy.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent se) {
-				payaraServer.setHotDeploy(hotDeploy.getSelection());
+				glassfishServer.setHotDeploy(hotDeploy.getSelection());
 			}
 		});
 
@@ -388,11 +388,11 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		attachDebuggerEarly.setLayoutData(data);
-		attachDebuggerEarly.setSelection(payaraServer.getAttachDebuggerEarly());
+		attachDebuggerEarly.setSelection(glassfishServer.getAttachDebuggerEarly());
 		attachDebuggerEarly.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent se) {
-				payaraServer.setAttachDebuggerEarly(attachDebuggerEarly.getSelection());
+				glassfishServer.setAttachDebuggerEarly(attachDebuggerEarly.getSelection());
 			}
 		});
 
@@ -422,7 +422,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 					containerLocationLabel.setVisible(false);
 					containerLocation.setVisible(false);
 				}
-				payaraServer.setInstanceType(instanceTypes[instanceTypeCombo.getSelectionIndex()]);
+				glassfishServer.setInstanceType(instanceTypes[instanceTypeCombo.getSelectionIndex()]);
 				validate(handle);
 			}
 
@@ -444,7 +444,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		hostLocation.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				payaraServer.setHostPath(hostLocation.getText());
+				glassfishServer.setHostPath(hostLocation.getText());
 				validate(handle);
 			}
 		});
@@ -459,7 +459,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 				String selectedDirectory = dialog.open();
 				if (selectedDirectory != null && !selectedDirectory.isEmpty()) {
 					hostLocation.setText(selectedDirectory);
-					payaraServer.setHostPath(hostLocation.getText());
+					glassfishServer.setHostPath(hostLocation.getText());
 					validate(handle);
 				}
 			}
@@ -480,7 +480,7 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 		containerLocation.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				payaraServer.setContainerPath(containerLocation.getText());
+				glassfishServer.setContainerPath(containerLocation.getText());
 				validate(handle);
 			}
 		});
@@ -525,13 +525,13 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 	}
 
 	private void updateServerName() {
-		GlassFishServer payaraServer = getGlassFishServer();
+		GlassFishServer glassfishServer = getGlassFishServer();
 		String name = getServer().getRuntime().getName() + " [";
 
-		if (payaraServer.isRemote()) {
-			name = name + payaraServer.getHost();
+		if (glassfishServer.isRemote()) {
+			name = name + glassfishServer.getHost();
 		} else {
-			name = name + payaraServer.getDomainName();
+			name = name + glassfishServer.getDomainName();
 		}
 
 		name = name + "]";
@@ -552,10 +552,10 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 
 	@SuppressWarnings("unused")
 	private GlassFishServer getGlassFishServer() {
-		GlassFishServer payaraServer = getServer().getAdapter(GlassFishServer.class);
-		if (payaraServer == null)
-			payaraServer = (GlassFishServer) getServer().loadAdapter(GlassFishServer.class, null);
-		return payaraServer;
+		GlassFishServer glassfishServer = getServer().getAdapter(GlassFishServer.class);
+		if (glassfishServer == null)
+			glassfishServer = (GlassFishServer) getServer().loadAdapter(GlassFishServer.class, null);
+		return glassfishServer;
 	}
 
 	protected String getTitle() {
@@ -604,26 +604,26 @@ public class NewGlassFishServerWizardFragment extends WizardFragment {
 
 	protected boolean validate(IWizardHandle wizard) {
 		boolean valid = true;
-		GlassFishServer payaraServer = getServer().getAdapter(GlassFishServer.class);
+		GlassFishServer glassfishServer = getServer().getAdapter(GlassFishServer.class);
 		if (wizard != null) {
 			wizard.setMessage(null, IMessageProvider.NONE);
 		}
-		if (payaraServer.getName() == null || payaraServer.getName().isBlank()) {
+		if (glassfishServer.getName() == null || glassfishServer.getName().isBlank()) {
 			if (wizard != null) {
 				wizard.setMessage("Server name is not valid", IMessageProvider.ERROR);
 			}
 		}
-		if (payaraServer.getHost() == null || payaraServer.getHost().isBlank()) {
+		if (glassfishServer.getHost() == null || glassfishServer.getHost().isBlank()) {
 			if (wizard != null) {
 				wizard.setMessage("Server Host is not valid", IMessageProvider.ERROR);
 			}
 		}
-		if (payaraServer.getAdminUser() == null || payaraServer.getAdminUser().isBlank()) {
+		if (glassfishServer.getAdminUser() == null || glassfishServer.getAdminUser().isBlank()) {
 			if (wizard != null) {
 				wizard.setMessage("Admin user name is not valid", IMessageProvider.ERROR);
 			}
 		}
-		IStatus status = payaraServer.validate();
+		IStatus status = glassfishServer.validate();
 		if (status.getSeverity() > 0) {
 			valid = false;
 			if (wizard != null) {

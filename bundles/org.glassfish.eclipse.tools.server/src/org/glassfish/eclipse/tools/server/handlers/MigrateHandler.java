@@ -48,8 +48,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public class MigrateHandler extends AbstractHandler {
 	
-	public static final String PAYARA_TRANSFORMER = "fish.payara.transformer";
-	public static final String PAYARA_TRANSFORMER_MAVEN = "fish.payara.transformer.maven";
+	public static final String PAYARA_TRANSFORMER = "fish.glassfish.transformer";
+	public static final String PAYARA_TRANSFORMER_MAVEN = "fish.glassfish.transformer.maven";
 	public static final String PAYARA_TRANSFORMER_VERSION = "0.2.14";
 	
 	private IPath resourcePath = null;

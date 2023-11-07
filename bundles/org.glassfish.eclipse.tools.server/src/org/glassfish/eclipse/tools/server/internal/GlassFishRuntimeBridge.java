@@ -88,23 +88,23 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
                 return components;
             }
 
-            final GlassFishRuntime payaraRuntime = (GlassFishRuntime) runtime.loadAdapter(GlassFishRuntime.class, new NullProgressMonitor());
+            final GlassFishRuntime glassfishRuntime = (GlassFishRuntime) runtime.loadAdapter(GlassFishRuntime.class, new NullProgressMonitor());
 
-            if (payaraRuntime != null) {
-                final Version payaraVersion = payaraRuntime.getVersion();
+            if (glassfishRuntime != null) {
+                final Version glassfishVersion = glassfishRuntime.getVersion();
 
-                if (payaraVersion != null) {
-                    String payaraMainVersion;
-                    if(payaraVersion.matches("[6")) {
-                        payaraMainVersion = "6";
-                    } else if(payaraVersion.matches("[5")) {
-                        payaraMainVersion = "5";
-                    } else if(payaraVersion.matches("[4")) {
-                        payaraMainVersion = "4";
+                if (glassfishVersion != null) {
+                    String glassfishMainVersion;
+                    if(glassfishVersion.matches("[6")) {
+                        glassfishMainVersion = "6";
+                    } else if(glassfishVersion.matches("[5")) {
+                        glassfishMainVersion = "5";
+                    } else if(glassfishVersion.matches("[4")) {
+                        glassfishMainVersion = "4";
                     } else {
-                        payaraMainVersion = "3.1";
+                        glassfishMainVersion = "3.1";
                     }
-                    IRuntimeComponentVersion payaraComponentVersion = getRuntimeComponentType("glassfish.runtime").getVersion(payaraMainVersion);
+                    IRuntimeComponentVersion glassfishComponentVersion = getRuntimeComponentType("glassfish.runtime").getVersion(glassfishMainVersion);
 
                     Map<String, String> properties = new HashMap<>(5);
                     if (runtime.getLocation() != null) {
@@ -120,11 +120,11 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
                         properties.put("type-id", runtime.getRuntimeType().getId());
                     }
 
-                    components.add(createRuntimeComponent(payaraComponentVersion, properties));
+                    components.add(createRuntimeComponent(glassfishComponentVersion, properties));
 
                     // Java Runtime Environment
 
-                    components.add(StandardJreRuntimeComponent.create(payaraRuntime.getVMInstall()));
+                    components.add(StandardJreRuntimeComponent.create(glassfishRuntime.getVMInstall()));
 
                     // Other
 

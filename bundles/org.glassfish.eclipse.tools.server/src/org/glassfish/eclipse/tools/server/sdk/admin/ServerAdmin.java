@@ -77,12 +77,12 @@ public class ServerAdmin {
      * Execution of administration command is serialized using internal executor.
      * <p>
      *
-     * @param payaraServer Target GlassFish server.
+     * @param glassfishServer Target GlassFish server.
      * @param command Server administration command to me executed.
      */
-    public static <E extends Result<?>> Future<E> exec(GlassFishServer payaraServer, Command command) {
-        return (Future<E>) AdminFactory.getInstance(payaraServer.getAdminInterface())
-                .getRunner(payaraServer, command)
+    public static <E extends Result<?>> Future<E> exec(GlassFishServer glassfishServer, Command command) {
+        return (Future<E>) AdminFactory.getInstance(glassfishServer.getAdminInterface())
+                .getRunner(glassfishServer, command)
                 .execute();
     }
 
@@ -149,12 +149,12 @@ public class ServerAdmin {
      * Execution of administration command is serialized using internal executor.
      * <p>
      *
-     * @param payaraServer Target GlassFish server.
+     * @param glassfishServer Target GlassFish server.
      * @param cmd Server administration command to me executed.
      * @param listeners Listeners that are called when command execution status changes.
      */
-    public static <E extends Result> Future<E> exec(GlassFishServer payaraServer, Command cmd, TaskStateListener... listeners) {
-        Runner runner = AdminFactory.getInstance(payaraServer.getAdminInterface()).getRunner(payaraServer, cmd);
+    public static <E extends Result> Future<E> exec(GlassFishServer glassfishServer, Command cmd, TaskStateListener... listeners) {
+        Runner runner = AdminFactory.getInstance(glassfishServer.getAdminInterface()).getRunner(glassfishServer, cmd);
         runner.stateListeners = listeners;
         return (Future<E>) runner.execute();
     }
@@ -166,11 +166,11 @@ public class ServerAdmin {
      * <p/>
      *
      * @param executor Executor service used to start task.
-     * @param payaraServer Target GlassFish server.
+     * @param glassfishServer Target GlassFish server.
      * @param cmd Server administration command to me executed.
      */
-    public static <E extends Result> Future<E> exec(ExecutorService executor, GlassFishServer payaraServer, Command cmd) {
-        Runner runner = AdminFactory.getInstance(payaraServer.getAdminInterface()).getRunner(payaraServer, cmd);
+    public static <E extends Result> Future<E> exec(ExecutorService executor, GlassFishServer glassfishServer, Command cmd) {
+        Runner runner = AdminFactory.getInstance(glassfishServer.getAdminInterface()).getRunner(glassfishServer, cmd);
         return (Future<E>) runner.execute(executor);
     }
 

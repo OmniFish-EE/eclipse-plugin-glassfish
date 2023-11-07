@@ -28,7 +28,7 @@ public class GlassFishDeploymentDescriptorFactory {
     static final String WEB_INF = "WEB-INF";
     static final String META_INF = "META-INF";
 
-    static final String WEB_DEPLOYMENT_DESCRIPTOR_NAME = "payara-web.xml";
+    static final String WEB_DEPLOYMENT_DESCRIPTOR_NAME = "glassfish-web.xml";
     static final String EJB_DEPLOYMENT_DESCRIPTOR_NAME = "glassfish-ejb-jar.xml";
 
     public static IGlassFishWebDeploymentDescriptor getWebDeploymentDescriptor(IProject project) {

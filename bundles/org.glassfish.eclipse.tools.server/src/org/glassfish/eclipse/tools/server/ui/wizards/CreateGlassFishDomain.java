@@ -46,19 +46,19 @@ public class CreateGlassFishDomain extends MessageDialog {
 	private Spinner portBase;
 	private Label message;
 	private ProgressBar pb;
-	private GlassFishServer payaraServer;
+	private GlassFishServer glassfishServer;
 	private GlassFishRuntime runtime;
 	private String path;
 	public static int MAXIMUM_PORT = 999999;
 	public static int DEFAULT_PORT = 8000;
 	public static String DEFAULT_DOMAIN = "domain1";
 
-	public CreateGlassFishDomain(Shell parentShell, GlassFishServer payaraServer, GlassFishRuntime runtime) {
+	public CreateGlassFishDomain(Shell parentShell, GlassFishServer glassfishServer, GlassFishRuntime runtime) {
 		super(parentShell, GlassfishWizardResources.newDomainTitle,
 				GlassFishServerPlugin.getImage(GlassFishServerPlugin.GF_SERVER_IMG),
 				GlassfishWizardResources.newDomainDescription, CONFIRM,
 				new String[] { GlassfishWizardResources.newDomainCreateButton, IDialogConstants.CANCEL_LABEL }, 0);
-		this.payaraServer = payaraServer;
+		this.glassfishServer = glassfishServer;
 		this.runtime = runtime;
 	}
 
@@ -135,7 +135,7 @@ public class CreateGlassFishDomain extends MessageDialog {
 		if(!domainNameValidation()) {
 			return false;
 		}
-		File asadmin = new File(new File(payaraServer.getServerHome(), "bin"),
+		File asadmin = new File(new File(glassfishServer.getServerHome(), "bin"),
 				Platform.getOS().equals(Platform.OS_WIN32) ? "asadmin.bat" : "asadmin");
 		if (asadmin.exists()) {
 			String javaExecutablePath = asadmin.getAbsolutePath();
@@ -243,7 +243,7 @@ public class CreateGlassFishDomain extends MessageDialog {
 		domainDir = new Text(group, SWT.BORDER);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		domainDir.setLayoutData(data);
-		domainDir.setText(payaraServer.getDomainsFolder());
+		domainDir.setText(glassfishServer.getDomainsFolder());
 
 		Button browse = new Button(group, SWT.PUSH);
 		browse.setText(GlassfishWizardResources.browse);

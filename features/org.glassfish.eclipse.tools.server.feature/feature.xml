@@ -5,7 +5,7 @@
       version="2.3.0"
       provider-name="%providerName">
 
-   <description url="https://www.payara.fish/products/ecosystem-catalog/">
+   <description>
       %featureDescription
    </description>
 

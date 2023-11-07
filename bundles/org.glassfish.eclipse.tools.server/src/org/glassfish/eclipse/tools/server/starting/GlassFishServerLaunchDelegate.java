@@ -175,14 +175,14 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
         serverBehavior.setGlassFishServerMode(mode);
     }
 
-    public ResultProcess launchServer(GlassFishServerBehaviour serverBehavior, StartupArgsImpl payaraStartArguments, StartMode launchMode, IProgressMonitor monitor, ILaunchConfiguration configuration, ILaunch launch) throws TimeoutException, InterruptedException, ExecutionException, HttpPortUpdateException {
+    public ResultProcess launchServer(GlassFishServerBehaviour serverBehavior, StartupArgsImpl glassfishStartArguments, StartMode launchMode, IProgressMonitor monitor, ILaunchConfiguration configuration, ILaunch launch) throws TimeoutException, InterruptedException, ExecutionException, HttpPortUpdateException {
         serverBehavior.setGlassFishServerState(STATE_STARTING);
 
         ResultProcess process = waitForGlassFishStarted(
             serverBehavior,
             asyncJobsService.submit(new GlassFishStartJob(
                 serverBehavior,
-                payaraStartArguments, launchMode,
+                glassfishStartArguments, launchMode,
                 configuration, launch, monitor
                 )),
             monitor);
@@ -256,14 +256,14 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
         startLogging(serverAdapter, serverBehavior);
 
         ResultProcess process = null;
-        Process payaraProcess = null;
+        Process glassfishProcess = null;
 
         try {
             process = launchServer(serverBehavior, startArgs, startMode, monitor, configuration, launch);
-            payaraProcess = process.getValue().getProcess();
+            glassfishProcess = process.getValue().getProcess();
             launch.setAttribute(ATTR_CAPTURE_OUTPUT, "false");
 
-            new RuntimeProcess(launch, payaraProcess, "GlassFish Application Server", null);
+            new RuntimeProcess(launch, glassfishProcess, "GlassFish Application Server", null);
         } catch (TimeoutException e) {
             abort("Unable to start server on time.", e);
         } catch (ExecutionException e) {
@@ -275,7 +275,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
         try {
             checkMonitorAndProgress(monitor, WORK_STEP);
         } catch (InterruptedException e) {
-            killProcesses(payaraProcess);
+            killProcesses(glassfishProcess);
         }
 
         setDefaultSourceLocator(launch, configuration);
@@ -285,7 +285,7 @@ public class GlassFishServerLaunchDelegate extends AbstractJavaLaunchConfigurati
                 serverBehavior.attach(launch, configuration.getWorkingCopy(), monitor, getDebugPort(process));
                 checkMonitorAndProgress(monitor, WORK_STEP);
             } catch (IllegalArgumentException e) {
-                killProcesses(payaraProcess);
+                killProcesses(glassfishProcess);
                 abort("Server run in debug mode but the debug port couldn't be determined!", e);
             }
         }

@@ -136,10 +136,10 @@ public class ServerLifecycleListener implements IServerLifecycleListener {
         deleteServerProject(server.getAttribute("name", ""));
     }
 
-    private void createServerProject(GlassFishServer payaraServer) {
+    private void createServerProject(GlassFishServer glassfishServer) {
 
         IWorkspace workSpace = ResourcesPlugin.getWorkspace();
-        IProject project = workSpace.getRoot().getProject(payaraServer.getName());
+        IProject project = workSpace.getRoot().getProject(glassfishServer.getName());
 
         if (project.exists()) {
             // Another project with the same name already exists.
@@ -149,13 +149,13 @@ public class ServerLifecycleListener implements IServerLifecycleListener {
         // Schedule a job to create the new project
         scheduleShortJob("Create project for new server",
             monitor -> {
-                IProjectDescription projectDescription = workSpace.newProjectDescription(payaraServer.getName());
+                IProjectDescription projectDescription = workSpace.newProjectDescription(glassfishServer.getName());
                 monitor.worked(10);
 
                 try {
                     projectDescription
                         .setLocation(Path.fromOSString(
-                            new File(payaraServer.getDomainsFolder() + separator + payaraServer.getDomainName()).getCanonicalPath()));
+                            new File(glassfishServer.getDomainsFolder() + separator + glassfishServer.getDomainName()).getCanonicalPath()));
 
                     project.create(projectDescription, monitor);
                     monitor.worked(25);

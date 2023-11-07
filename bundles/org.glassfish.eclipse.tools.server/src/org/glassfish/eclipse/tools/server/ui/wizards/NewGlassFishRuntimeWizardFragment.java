@@ -122,7 +122,7 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 	}
 
 	public void createContent(Composite parent, IWizardHandle handle) {
-		GlassFishRuntime payaraRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
+		GlassFishRuntime glassfishRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
 
 		GridLayout layout = new GridLayout(1, true);
 		parent.setLayout(layout);
@@ -155,7 +155,7 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 		});
 		
 		label = new Label(group, SWT.NONE);
-		label.setText(GlassfishWizardResources.payaraLocation);
+		label.setText(GlassfishWizardResources.glassfishLocation);
 		data = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_END);
 		data.horizontalSpan = 2;
 		label.setLayoutData(data);
@@ -190,8 +190,8 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 		});
 
 		// JDK location
-		JdkFilter jdkFilter = payaraRuntime.getVersion() == null ? null
-				: new JdkFilter(payaraRuntime.getJavaVersionConstraint());
+		JdkFilter jdkFilter = glassfishRuntime.getVersion() == null ? null
+				: new JdkFilter(glassfishRuntime.getJavaVersionConstraint());
 		updateJREs(jdkFilter);
 		label = new Label(group, SWT.NONE);
 		label.setText(GlassfishWizardResources.installedJRE);
@@ -212,8 +212,8 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 				if (sel > 0) {
 					vmInstall = installedJREs.get(sel - 1);
 				}
-				GlassFishRuntime payaraRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
-				payaraRuntime.setVMInstall(vmInstall);
+				GlassFishRuntime glassfishRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
+				glassfishRuntime.setVMInstall(vmInstall);
 			}
 
 			@Override
@@ -228,8 +228,8 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 			public void widgetSelected(SelectionEvent e) {
 				String currentVM = jrecombo.getText();
 				if (showPreferencePage(parent)) {
-					JdkFilter jdkFilter = payaraRuntime.getVersion() == null ? null
-							: new JdkFilter(payaraRuntime.getJavaVersionConstraint());
+					JdkFilter jdkFilter = glassfishRuntime.getVersion() == null ? null
+							: new JdkFilter(glassfishRuntime.getJavaVersionConstraint());
 					updateJREs(jdkFilter);
 					jrecombo.setItems(jreNames);
 					jrecombo.setText(currentVM);
@@ -241,9 +241,9 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 	}
 	
 	private void setDefaultJREComboText() {
-		GlassFishRuntime payaraRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
-		if (payaraRuntime != null && payaraRuntime.getVMInstall() != null) {
-			String selectedJRE = payaraRuntime.getVMInstall().getName();
+		GlassFishRuntime glassfishRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
+		if (glassfishRuntime != null && glassfishRuntime.getVMInstall() != null) {
+			String selectedJRE = glassfishRuntime.getVMInstall().getName();
 
 			int defaultIndex = -1;
 			for (int i = 0; i < jreNames.length; i++) {
@@ -393,15 +393,15 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 		if (wizard != null) {
 			wizard.setMessage(null, IMessageProvider.NONE);
 		}
-		GlassFishRuntime payaraRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
-		IStatus status = payaraRuntime.validateServerLocation(new Path(serverLocation.getText()));
+		GlassFishRuntime glassfishRuntime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
+		IStatus status = glassfishRuntime.validateServerLocation(new Path(serverLocation.getText()));
 		if (status.getSeverity() > 0) {
 			valid = false;
 			if (wizard != null) {
 				wizard.setMessage(status.getMessage(), IMessageProvider.ERROR);
 			}
 		}
-		if (payaraRuntime.getVMInstall() == null) {
+		if (glassfishRuntime.getVMInstall() == null) {
 			if (wizard != null) {
 				wizard.setMessage("JRE path is not valid", IMessageProvider.ERROR);
 			}
@@ -413,7 +413,7 @@ public class NewGlassFishRuntimeWizardFragment extends WizardFragment {
 			}
 			valid = false;
 		} else {
-			IRuntime thisRuntime = payaraRuntime.getRuntime();
+			IRuntime thisRuntime = glassfishRuntime.getRuntime();
 
 			if (thisRuntime instanceof IRuntimeWorkingCopy) {
 				thisRuntime = ((IRuntimeWorkingCopy) thisRuntime).getOriginal();

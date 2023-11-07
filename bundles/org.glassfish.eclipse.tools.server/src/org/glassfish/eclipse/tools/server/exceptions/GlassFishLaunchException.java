@@ -22,7 +22,7 @@ public class GlassFishLaunchException extends Exception {
 
     private static final long serialVersionUID = -3931653934641477601L;
 
-    private Process payaraProcess;
+    private Process glassfishProcess;
 
     public GlassFishLaunchException() {
         super();
@@ -36,9 +36,9 @@ public class GlassFishLaunchException extends Exception {
         this(message, null, gfProcess);
     }
 
-    public GlassFishLaunchException(String message, Throwable cause, Process payaraProcess) {
+    public GlassFishLaunchException(String message, Throwable cause, Process glassfishProcess) {
         super(message, cause);
-        this.payaraProcess = payaraProcess;
+        this.glassfishProcess = glassfishProcess;
     }
 
     public GlassFishLaunchException(String message) {
@@ -50,7 +50,7 @@ public class GlassFishLaunchException extends Exception {
     }
 
     public Process getStartedProcess() {
-        return payaraProcess;
+        return glassfishProcess;
     }
 
 }

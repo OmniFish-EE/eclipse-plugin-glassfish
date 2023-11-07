@@ -203,10 +203,10 @@ public final class GlassFishRuntime extends RuntimeDelegate implements IJavaRunt
         IPath location = getRuntime().getLocation();
 
         if (location != null) {
-            GlassFishLocationUtils payaraInstall = find(location.toFile());
+            GlassFishLocationUtils glassfishInstall = find(location.toFile());
 
-            if (payaraInstall != null) {
-                return payaraInstall.version();
+            if (glassfishInstall != null) {
+                return glassfishInstall.version();
             }
         }
 

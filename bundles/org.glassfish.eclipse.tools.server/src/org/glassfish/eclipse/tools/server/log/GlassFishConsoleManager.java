@@ -91,19 +91,19 @@ public class GlassFishConsoleManager {
      */
     public static IGlassFishConsole getStartupProcessConsole(GlassFishServer server, Process launchProcess) {
         String consoleID = createStartupProcessConsoleName(server);
-        IGlassFishConsole payaraConsole = findConsole(consoleID);
-        if (payaraConsole == null) {
-            payaraConsole = new GlassFishStartupConsole(consoleID, new NoOpFilter());
+        IGlassFishConsole glassfishConsole = findConsole(consoleID);
+        if (glassfishConsole == null) {
+            glassfishConsole = new GlassFishStartupConsole(consoleID, new NoOpFilter());
         }
 
-        return payaraConsole;
+        return glassfishConsole;
     }
 
     public static void removeServerLogFileConsole(GlassFishServer server) {
         String consoleID = createServerLogConsoleName(server);
-        IGlassFishConsole payaraConsole = findConsole(consoleID);
-        if (payaraConsole != null) {
-            manager.removeConsoles(new IConsole[] { payaraConsole });
+        IGlassFishConsole glassfishConsole = findConsole(consoleID);
+        if (glassfishConsole != null) {
+            manager.removeConsoles(new IConsole[] { glassfishConsole });
         }
     }
 

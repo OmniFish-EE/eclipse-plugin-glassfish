@@ -102,18 +102,18 @@ public final class GlassFishLocationUtils {
             IRuntime primary = project.getPrimaryRuntime();
 
             if (primary != null) {
-                GlassFishLocationUtils payaraLocation = find(primary);
+                GlassFishLocationUtils glassfishLocation = find(primary);
 
-                if (payaraLocation != null) {
-                    return payaraLocation;
+                if (glassfishLocation != null) {
+                    return glassfishLocation;
                 }
 
                 for (IRuntime runtime : project.getTargetedRuntimes()) {
                     if (runtime != primary) {
-                        payaraLocation = find(runtime);
+                        glassfishLocation = find(runtime);
 
-                        if (payaraLocation != null) {
-                            return payaraLocation;
+                        if (glassfishLocation != null) {
+                            return glassfishLocation;
                         }
                     }
                 }
@@ -126,10 +126,10 @@ public final class GlassFishLocationUtils {
     public static synchronized GlassFishLocationUtils find(IRuntime runtime) {
         if (runtime != null) {
             for (IRuntimeComponent component : runtime.getRuntimeComponents()) {
-                GlassFishLocationUtils payaraLocation = find(component);
+                GlassFishLocationUtils glassfishLocation = find(component);
 
-                if (payaraLocation != null) {
-                    return payaraLocation;
+                if (glassfishLocation != null) {
+                    return glassfishLocation;
                 }
             }
         }
@@ -158,27 +158,27 @@ public final class GlassFishLocationUtils {
             }
         }
 
-        GlassFishLocationUtils payaraLocation = null;
+        GlassFishLocationUtils glassfishLocation = null;
 
         if (location != null) {
-            SoftReference<GlassFishLocationUtils> payaraLocationReference = CACHE.get(location);
+            SoftReference<GlassFishLocationUtils> glassfishLocationReference = CACHE.get(location);
 
-            if (payaraLocationReference != null) {
-                payaraLocation = payaraLocationReference.get();
+            if (glassfishLocationReference != null) {
+                glassfishLocation = glassfishLocationReference.get();
             }
 
-            if (payaraLocation == null) {
+            if (glassfishLocation == null) {
                 try {
-                    payaraLocation = new GlassFishLocationUtils(location);
+                    glassfishLocation = new GlassFishLocationUtils(location);
                 } catch (IllegalArgumentException e) {
                     return null;
                 }
 
-                CACHE.put(location, new SoftReference<>(payaraLocation));
+                CACHE.put(location, new SoftReference<>(glassfishLocation));
             }
         }
 
-        return payaraLocation;
+        return glassfishLocation;
     }
 
 
@@ -188,14 +188,14 @@ public final class GlassFishLocationUtils {
     private GlassFishLocationUtils(File location) {
         checkLocationIsValid(location);
 
-        File payaraLocation = location;
+        File glassfishLocation = location;
 
-        File gfApiJar = new File(payaraLocation, "modules/glassfish-api.jar");
+        File gfApiJar = new File(glassfishLocation, "modules/glassfish-api.jar");
 
         if (!gfApiJar.exists()) {
-            payaraLocation = new File(payaraLocation, "glassfish");
+            glassfishLocation = new File(glassfishLocation, "glassfish");
 
-            gfApiJar = new File(payaraLocation, "modules/glassfish-api.jar");
+            gfApiJar = new File(glassfishLocation, "modules/glassfish-api.jar");
 
             if (!gfApiJar.exists()) {
                 throw new IllegalArgumentException();
@@ -207,7 +207,7 @@ public final class GlassFishLocationUtils {
         }
 
         version = readGlassFishVerionFromAPIJar(gfApiJar);
-        libraries = readLibraryFilesFromGlassFishLocation(payaraLocation, version);
+        libraries = readLibraryFilesFromGlassFishLocation(glassfishLocation, version);
     }
 
     public Version version() {
@@ -243,35 +243,35 @@ public final class GlassFishLocationUtils {
      * Gets the relative file name patterns for the system libraries corresponding to the given GlassFish
      * version, and turns these into a list of actual files for the given GlassFish location on disk.
      *
-     * @param payaraLocation location where GlassFish is installed
-     * @param payaraVersion version of GlassFish for which libraries are to be retrieved
+     * @param glassfishLocation location where GlassFish is installed
+     * @param glassfishVersion version of GlassFish for which libraries are to be retrieved
      *
      * @return list of system libraries as actual files
      */
-    private Map<String, List<File>> readLibraryFilesFromGlassFishLocation(File payaraLocation, Version payaraVersion) {
+    private Map<String, List<File>> readLibraryFilesFromGlassFishLocation(File glassfishLocation, Version glassfishVersion) {
         Map<String, List<File>> librariesPerVariant = new HashMap<>();
 
         librariesPerVariant.put(
             DEFAULT_LIBRARIES,
-            readLibrariesByPattern(payaraLocation, SystemLibraries.getLibraryIncludesByVersion(payaraVersion)));
+            readLibrariesByPattern(glassfishLocation, SystemLibraries.getLibraryIncludesByVersion(glassfishVersion)));
 
         librariesPerVariant.put(
             ALL_LIBRARIES,
-            readLibrariesByPattern(payaraLocation, new String[] {"**/*.jar"}, new String[] {"**/osgi-cache/**"}));
+            readLibrariesByPattern(glassfishLocation, new String[] {"**/*.jar"}, new String[] {"**/osgi-cache/**"}));
 
         return librariesPerVariant;
     }
 
-    private List<File> readLibrariesByPattern(File payaraLocation, String[] inclusionPattern) {
-        return readLibrariesByPattern(payaraLocation, inclusionPattern, null);
+    private List<File> readLibrariesByPattern(File glassfishLocation, String[] inclusionPattern) {
+        return readLibrariesByPattern(glassfishLocation, inclusionPattern, null);
     }
 
-    private List<File> readLibrariesByPattern(File payaraLocation, String[] inclusionPattern, String[] exclusionPattern) {
+    private List<File> readLibrariesByPattern(File glassfishLocation, String[] inclusionPattern, String[] exclusionPattern) {
         if (inclusionPattern == null) {
             return emptyList();
         }
 
-        File parentFolderToLocation = payaraLocation.getParentFile();
+        File parentFolderToLocation = glassfishLocation.getParentFile();
 
         // Use a directory scanner to resolve the wildcards and obtain an expanded
         // list of relative files.

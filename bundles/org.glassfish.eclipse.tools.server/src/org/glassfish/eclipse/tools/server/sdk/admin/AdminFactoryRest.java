@@ -72,12 +72,12 @@ public class AdminFactoryRest extends AdminFactory {
      * <code>Command</code> instance.
      * <p>
      *
-     * @param payaraServer GlassFish server entity object.
+     * @param glassfishServer GlassFish server entity object.
      * @param cmd GlassFish server administration command entity.
      * @return GlassFish server administration command execution object.
      */
     @Override
-    public Runner getRunner(final GlassFishServer payaraServer, final Command cmd) {
+    public Runner getRunner(final GlassFishServer glassfishServer, final Command cmd) {
         Runner runner;
 
         Class<? extends Command> commandClass = cmd.getClass();
@@ -85,13 +85,13 @@ public class AdminFactoryRest extends AdminFactory {
 
         if (runnerRestClass != null) {
             String command = runnerRestClass.command();
-            runner = newRunner(payaraServer, cmd, runnerRestClass.runner());
+            runner = newRunner(glassfishServer, cmd, runnerRestClass.runner());
 
             if (command != null && !command.isEmpty()) {
                 cmd.command = command;
             }
         } else {
-            runner = new RunnerRest(payaraServer, cmd);
+            runner = new RunnerRest(glassfishServer, cmd);
         }
 
         return runner;

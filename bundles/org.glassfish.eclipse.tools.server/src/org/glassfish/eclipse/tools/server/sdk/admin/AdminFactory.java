@@ -95,11 +95,11 @@ public abstract class AdminFactory {
      * instance.
      * <p/>
      *
-     * @param payaraServer Target GlassFish server.
+     * @param glassfishServer Target GlassFish server.
      * @param command GlassFish server administration command entity.
      * @return GlassFish server administration command execution object.
      */
-    public abstract Runner getRunner(GlassFishServer payaraServer, Command command);
+    public abstract Runner getRunner(GlassFishServer glassfishServer, Command command);
 
     ////////////////////////////////////////////////////////////////////////////
     // Methods //
@@ -109,13 +109,13 @@ public abstract class AdminFactory {
      * Constructs an instance of selected <code>Runner</code> child class.
      * <p/>
      *
-     * @param payaraServer Target GlassFish server.
+     * @param glassfishServer Target GlassFish server.
      * @param command GlassFish server administration command entity.
      * @param runnerClass Class of newly instantiated <code>runner</code>
      * @return GlassFish server administration command execution object.
      * @throws <code>CommandException</code> if construction of new instance fails.
      */
-    Runner newRunner(GlassFishServer payaraServer, Command command, Class<? extends Runner> runnerClass) throws CommandException {
+    Runner newRunner(GlassFishServer glassfishServer, Command command, Class<? extends Runner> runnerClass) throws CommandException {
 
         Constructor<? extends Runner> runnerConstructor = null;
         Runner runner = null;
@@ -130,7 +130,7 @@ public abstract class AdminFactory {
         }
 
         try {
-            runner = runnerConstructor.newInstance(payaraServer, command);
+            runner = runnerConstructor.newInstance(glassfishServer, command);
         } catch (InstantiationException | IllegalAccessException ie) {
             throw new CommandException(RUNNER_INIT, ie);
         } catch (InvocationTargetException ite) {

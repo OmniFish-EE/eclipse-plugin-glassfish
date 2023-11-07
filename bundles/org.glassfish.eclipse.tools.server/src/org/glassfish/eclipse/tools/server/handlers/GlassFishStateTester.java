@@ -36,18 +36,18 @@ public class GlassFishStateTester extends PropertyTester {
         }
 
         if (property.equals("isRemote")) {
-            GlassFishServer payaraServer = load(server, GlassFishServer.class);
+            GlassFishServer glassfishServer = load(server, GlassFishServer.class);
 
-            if (payaraServer != null) {
-                return payaraServer.isRemote();
+            if (glassfishServer != null) {
+                return glassfishServer.isRemote();
             }
         }
 
         if (property.equals("isWSLInstance")) {
-            GlassFishServer payaraServer = load(server, GlassFishServer.class);
+            GlassFishServer glassfishServer = load(server, GlassFishServer.class);
 
-            if (payaraServer != null) {
-                return payaraServer.isWSLInstance();
+            if (glassfishServer != null) {
+                return glassfishServer.isWSLInstance();
             }
         }
 

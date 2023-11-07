@@ -307,12 +307,12 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 	 * get the correct adapter for the GlassFish server
 	 */
 	public GlassFishServer getGlassFishServerDelegate() {
-		GlassFishServer payaraServer = getServer().getAdapter(GlassFishServer.class);
-		if (payaraServer == null) {
-			payaraServer = (GlassFishServer) getServer().loadAdapter(GlassFishServer.class, new NullProgressMonitor());
+		GlassFishServer glassfishServer = getServer().getAdapter(GlassFishServer.class);
+		if (glassfishServer == null) {
+			glassfishServer = (GlassFishServer) getServer().loadAdapter(GlassFishServer.class, new NullProgressMonitor());
 		}
 
-		return payaraServer;
+		return glassfishServer;
 	}
 
 	public ServerStatus getServerStatus(boolean forceUpdate) {
@@ -582,7 +582,7 @@ public final class GlassFishServerBehaviour extends ServerBehaviourDelegate impl
 			try {
 				undeploy(module);
 			} catch (Exception e) {
-				// Bug 16876200 - UNABLE TO CLEAN PAYARA SERVER INSTANCE
+				// Bug 16876200 - UNABLE TO CLEAN GLASSFISH SERVER INSTANCE
 				// In case undeploy with asadmin failed, catch the exception and
 				// try delete the app directory from server directly next
 			}

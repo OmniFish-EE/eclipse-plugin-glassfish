@@ -85,7 +85,7 @@ public class ServerPropertyPage extends PropertyPage {
 
 	protected Button attachDebuggerEarly;
 
-	private GlassFishServer payaraServer;
+	private GlassFishServer glassfishServer;
 
 	public static int MAXIMUM_PORT = 999999;
 
@@ -99,16 +99,16 @@ public class ServerPropertyPage extends PropertyPage {
             serverWorkingCopy = server.createWorkingCopy();
         }
 
-        payaraServer = load(serverWorkingCopy, GlassFishServer.class);
+        glassfishServer = load(serverWorkingCopy, GlassFishServer.class);
 
-        Control control = createContent(payaraServer, parent);
+        Control control = createContent(glassfishServer, parent);
         refreshStatus();
 
         return control;
 
     }
 
-	public Composite createContent(GlassFishServer payaraServer, Composite parent) {
+	public Composite createContent(GlassFishServer glassfishServer, Composite parent) {
 
 		GridLayout layout = new GridLayout(1, true);
 		parent.setLayout(layout);
@@ -131,7 +131,7 @@ public class ServerPropertyPage extends PropertyPage {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		serverName.setLayoutData(data);
-		serverName.setText(payaraServer.getName());
+		serverName.setText(glassfishServer.getName());
 
 		label = new Label(group, SWT.NONE);
 		label.setText(GlassfishWizardResources.serverHost);
@@ -142,7 +142,7 @@ public class ServerPropertyPage extends PropertyPage {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		serverHost.setLayoutData(data);
-		serverHost.setText(payaraServer.getHost());
+		serverHost.setText(glassfishServer.getHost());
 
 		label = new Label(group, SWT.NONE);
 		label.setText(GlassfishWizardResources.domainPath);
@@ -153,7 +153,7 @@ public class ServerPropertyPage extends PropertyPage {
 		domainLocation = new Text(group, SWT.BORDER);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		domainLocation.setLayoutData(data);
-		domainLocation.setText(payaraServer.getDomainPath());
+		domainLocation.setText(glassfishServer.getDomainPath());
 
 		Button browse = new Button(group, SWT.PUSH);
 		browse.setText(GlassfishWizardResources.browse);
@@ -175,7 +175,7 @@ public class ServerPropertyPage extends PropertyPage {
 			public void widgetSelected(SelectionEvent se) {
 
 //				GlassFishRuntime runtime = (GlassFishRuntime) getServerRuntime().loadAdapter(GlassFishRuntime.class, null);
-//				CreateGlassFishDomain domain = new CreateGlassFishDomain(parent.getShell(), payaraServer, runtime);
+//				CreateGlassFishDomain domain = new CreateGlassFishDomain(parent.getShell(), glassfishServer, runtime);
 //				domain.open();
 //				String selectedDirectory = domain.getPath();
 //				if (selectedDirectory != null && !selectedDirectory.isEmpty()) {
@@ -200,7 +200,7 @@ public class ServerPropertyPage extends PropertyPage {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		adminName.setLayoutData(data);
-		adminName.setText(payaraServer.getAdminUser());
+		adminName.setText(glassfishServer.getAdminUser());
 
 		label = new Label(group, SWT.NONE);
 		label.setText(GlassfishWizardResources.adminPassword);
@@ -212,7 +212,7 @@ public class ServerPropertyPage extends PropertyPage {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		adminPassword.setLayoutData(data);
-		adminPassword.setText(payaraServer.getAdminPassword());
+		adminPassword.setText(glassfishServer.getAdminPassword());
 
 		label = new Label(group, SWT.NONE);
 		label.setText(GlassfishWizardResources.debugPort);
@@ -227,7 +227,7 @@ public class ServerPropertyPage extends PropertyPage {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		debugPort.setLayoutData(data);
-		debugPort.setSelection(payaraServer.getDebugPort());
+		debugPort.setSelection(glassfishServer.getDebugPort());
 
 		label = new Label(group, SWT.HORIZONTAL | SWT.SEPARATOR);
 		data = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_END);
@@ -240,14 +240,14 @@ public class ServerPropertyPage extends PropertyPage {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		keepSessions.setLayoutData(data);
-		keepSessions.setSelection(payaraServer.getKeepSessions());
+		keepSessions.setSelection(glassfishServer.getKeepSessions());
 
 		jarDeploy = new Button(group, SWT.CHECK);
 		jarDeploy.setText(GlassfishWizardResources.jarDeploy);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		jarDeploy.setLayoutData(data);
-		jarDeploy.setSelection(payaraServer.getJarDeploy());
+		jarDeploy.setSelection(glassfishServer.getJarDeploy());
 
 		label = new Label(group, SWT.HORIZONTAL | SWT.SEPARATOR);
 		data = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_END);
@@ -265,22 +265,22 @@ public class ServerPropertyPage extends PropertyPage {
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		restartPattern.setLayoutData(data);
-		restartPattern.setText(payaraServer.getRestartPattern());
-		restartPattern.addModifyListener(e -> payaraServer.setRestartPattern(restartPattern.getText()));
+		restartPattern.setText(glassfishServer.getRestartPattern());
+		restartPattern.addModifyListener(e -> glassfishServer.setRestartPattern(restartPattern.getText()));
 
 		hotDeploy = new Button(group, SWT.CHECK);
 		hotDeploy.setText(GlassfishWizardResources.enableHotDeploy);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		hotDeploy.setLayoutData(data);
-		hotDeploy.setSelection(payaraServer.getHotDeploy());
+		hotDeploy.setSelection(glassfishServer.getHotDeploy());
 
 		attachDebuggerEarly = new Button(group, SWT.CHECK);
 		attachDebuggerEarly.setText(GlassfishWizardResources.attachDebugEarly);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
 		attachDebuggerEarly.setLayoutData(data);
-		attachDebuggerEarly.setSelection(payaraServer.getAttachDebuggerEarly());
+		attachDebuggerEarly.setSelection(glassfishServer.getAttachDebuggerEarly());
 		return group;
 	}
 
@@ -308,10 +308,10 @@ public class ServerPropertyPage extends PropertyPage {
     // note that this is currently not working due to issue 140
     // public void propertyChange(PropertyChangeEvent evt) {
     // if (AbstractGlassfishServer.DOMAINUPDATE == evt.getPropertyName()) {
-    // username.setText(payaraServer.getAdminUser());
-    // password.setText(payaraServer.getAdminPassword());
-    // adminServerPortNumber.setText(Integer.toString(payaraServer.getAdminPort()));
-    // serverPortNumber.setText(Integer.toString(payaraServer.getPort()));
+    // username.setText(glassfishServer.getAdminUser());
+    // password.setText(glassfishServer.getAdminPassword());
+    // adminServerPortNumber.setText(Integer.toString(glassfishServer.getAdminPort()));
+    // serverPortNumber.setText(Integer.toString(glassfishServer.getPort()));
     // }
     // }
 
@@ -329,15 +329,15 @@ public class ServerPropertyPage extends PropertyPage {
 
             serverWorkingCopy.setName(serverName.getText());
             serverWorkingCopy.setHost(serverHost.getText());
-			payaraServer.setDomainPath(domainLocation.getText());
-            payaraServer.setAdminUser(adminName.getText());
-			payaraServer.setAdminPassword(adminPassword.getText());
-			payaraServer.setDebugPort(debugPort.getSelection());
-            payaraServer.setKeepSessions(keepSessions.getSelection());
-			payaraServer.setJarDeploy(jarDeploy.getSelection());
-            payaraServer.setRestartPattern(restartPattern.getText());
-			payaraServer.setHotDeploy(hotDeploy.getSelection());
-			payaraServer.setAttachDebuggerEarly(attachDebuggerEarly.getSelection());
+			glassfishServer.setDomainPath(domainLocation.getText());
+            glassfishServer.setAdminUser(adminName.getText());
+			glassfishServer.setAdminPassword(adminPassword.getText());
+			glassfishServer.setDebugPort(debugPort.getSelection());
+            glassfishServer.setKeepSessions(keepSessions.getSelection());
+			glassfishServer.setJarDeploy(jarDeploy.getSelection());
+            glassfishServer.setRestartPattern(restartPattern.getText());
+			glassfishServer.setHotDeploy(hotDeploy.getSelection());
+			glassfishServer.setAttachDebuggerEarly(attachDebuggerEarly.getSelection());
 
             scheduleShortJob("Update GlassFish server state", monitor -> {
 

@@ -42,16 +42,16 @@ import org.glassfish.eclipse.tools.server.sdk.server.ServerTasks.StartMode;
 
 public class GlassFishStartJob implements Callable<ResultProcess> {
 
-    private GlassFishServerBehaviour payaraServerBehaviour;
+    private GlassFishServerBehaviour glassfishServerBehaviour;
     private StartupArgsImpl args;
     private StartMode mode;
     private ILaunchConfiguration configuration;
     private ILaunch launch;
     private IProgressMonitor monitor;
 
-    public GlassFishStartJob(GlassFishServerBehaviour payaraServerBehaviour, StartupArgsImpl args, StartMode mode, ILaunchConfiguration configuration, ILaunch launch, IProgressMonitor monitor) {
+    public GlassFishStartJob(GlassFishServerBehaviour glassfishServerBehaviour, StartupArgsImpl args, StartMode mode, ILaunchConfiguration configuration, ILaunch launch, IProgressMonitor monitor) {
         super();
-        this.payaraServerBehaviour = payaraServerBehaviour;
+        this.glassfishServerBehaviour = glassfishServerBehaviour;
         this.args = args;
         this.mode = mode;
         this.configuration = configuration;
@@ -62,19 +62,19 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
     @Override
     public ResultProcess call() throws Exception {
 
-        boolean earlyAttach = payaraServerBehaviour.getGlassFishServerDelegate().getAttachDebuggerEarly();
+        boolean earlyAttach = glassfishServerBehaviour.getGlassFishServerDelegate().getAttachDebuggerEarly();
 
         // Create the process that starts the server
         ResultProcess process = startGlassFish(earlyAttach);
 
-        Process payaraProcess = process.getValue().getProcess();
+        Process glassfishProcess = process.getValue().getProcess();
 
         // Read process std output to prevent process'es blocking
-        IGlassFishConsole startupConsole = startLogging(payaraProcess);
+        IGlassFishConsole startupConsole = startLogging(glassfishProcess);
 
-        IGlassFishConsole filelogConsole = getStandardConsole(payaraServerBehaviour.getGlassFishServerDelegate());
+        IGlassFishConsole filelogConsole = getStandardConsole(glassfishServerBehaviour.getGlassFishServerDelegate());
 
-        synchronized (payaraServerBehaviour) {
+        synchronized (glassfishServerBehaviour) {
 
             boolean attached = false;
             boolean hasLogged = false;
@@ -84,10 +84,10 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
 
             check_server_status: while (true) {
 
-                switch (payaraServerBehaviour.getServerStatus(false)) {
+                switch (glassfishServerBehaviour.getServerStatus(false)) {
                     case STOPPED_NOT_LISTENING:
                         try {
-                            if (payaraProcess.isAlive()) {
+                            if (glassfishProcess.isAlive()) {
 
                                 // Server is not (yet) listening.
                                 // Check if we need to attach the debugger for it to continue.
@@ -95,7 +95,7 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
 
                                 if (earlyAttach && mode == DEBUG && !attached) {
                                     try {
-                                        payaraServerBehaviour.attach(launch, configuration.getWorkingCopy(), null, getDebugPort(process));
+                                        glassfishServerBehaviour.attach(launch, configuration.getWorkingCopy(), null, getDebugPort(process));
                                         checkMonitorAndProgress(monitor, WORK_STEP);
                                         attached = true;
                                     } catch (CoreException e) {
@@ -104,7 +104,7 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
                                     }
                                 }
                             } else {
-                                int exitCode = payaraProcess.exitValue();
+                                int exitCode = glassfishProcess.exitValue();
 
                                 if (exitCode != 0) {
                                     // Something bad happened, show user startup console
@@ -122,18 +122,18 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
                         break;
                     case RUNNING_PROXY_ERROR:
                         startupConsole.stopLogging();
-                        payaraProcess.destroy();
+                        glassfishProcess.destroy();
 
                         throw new GlassFishLaunchException(
                             "BAD GATEWAY response code returned. Check your proxy settings. Killing startup process.",
-                            payaraProcess);
+                            glassfishProcess);
                     case RUNNING_CREDENTIAL_PROBLEM:
                         startupConsole.stopLogging();
-                        payaraProcess.destroy();
-                        AdminCredentialsDialog.open(payaraServerBehaviour.getServer());
+                        glassfishProcess.destroy();
+                        AdminCredentialsDialog.open(glassfishServerBehaviour.getServer());
 
                         throw new GlassFishLaunchException("Wrong user name or password. Killing startup process.",
-                            payaraProcess);
+                            glassfishProcess);
                     case RUNNING_DOMAIN_MATCHING:
                         startupConsole.stopLogging();
                         break check_server_status;
@@ -146,7 +146,7 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
                     checkMonitor(monitor);
 
                     // Limit waiting so we can check process exit code again
-                    payaraServerBehaviour.wait(500);
+                    glassfishServerBehaviour.wait(500);
 
                     if (!hasLogged && (startupConsole.hasLogged() || filelogConsole.hasLogged())) {
                         // Something has been logged meaning the JVM of the target
@@ -165,7 +165,7 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
 
                 } catch (InterruptedException e) {
                     startupConsole.stopLogging();
-                    payaraProcess.destroy();
+                    glassfishProcess.destroy();
                     throw e;
                 }
             }
@@ -178,18 +178,18 @@ public class GlassFishStartJob implements Callable<ResultProcess> {
         try {
             // Process the arguments and call the CommandStartDAS command which will initiate
             // starting the GlassFish server
-            return startServer(payaraServerBehaviour.getGlassFishServerDelegate(), args, mode, earlyAttach);
+            return startServer(glassfishServerBehaviour.getGlassFishServerDelegate(), args, mode, earlyAttach);
         } catch (GlassFishIdeException e) {
             throw new GlassFishLaunchException("Exception in startup library.", e);
         }
     }
 
-    private IGlassFishConsole startLogging(Process payaraProcess) {
-        IGlassFishConsole startupConsole = getStartupProcessConsole(payaraServerBehaviour.getGlassFishServerDelegate(), payaraProcess);
+    private IGlassFishConsole startLogging(Process glassfishProcess) {
+        IGlassFishConsole startupConsole = getStartupProcessConsole(glassfishServerBehaviour.getGlassFishServerDelegate(), glassfishProcess);
 
         startupConsole.startLogging(
-                new FetchLogSimple(payaraProcess.getInputStream()),
-                new FetchLogSimple(payaraProcess.getErrorStream()));
+                new FetchLogSimple(glassfishProcess.getInputStream()),
+                new FetchLogSimple(glassfishProcess.getErrorStream()));
 
         return startupConsole;
     }

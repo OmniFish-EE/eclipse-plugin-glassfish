@@ -40,7 +40,7 @@
 /.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
 /.metadata/version.ini
 /bundles/org.glassfish.eclipse.tools.server/.settings/org.eclipse.jdt.core.prefs
-/bundles/org.glassfish.eclipse.tools.server/src/fish/payara/eclipse/tools/server/handlers/RefactorHandler.java
+/bundles/org.glassfish.eclipse.tools.server/src/fish/glassfish/eclipse/tools/server/handlers/RefactorHandler.java
 /features/org.glassfish.eclipse.tools.server.feature/.polyglot.build.properties
 /.metadata/.plugins/org.eclipse.m2e.logback/logback.2.1.0.20221015-0744.xml
 /.metadata/

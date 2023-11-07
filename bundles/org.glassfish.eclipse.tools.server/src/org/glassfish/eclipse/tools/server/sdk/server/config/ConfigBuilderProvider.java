@@ -27,6 +27,7 @@ import org.glassfish.eclipse.tools.server.utils.Version;
 
 /**
  * Configuration builder provider.
+ * 
  * <p/>
  * This class is responsible for handling providers for individual server instances. Because
  * {@link ConfigBuilder} class instance shall not be used for multiple GlassFish server versions
@@ -60,13 +61,15 @@ public class ConfigBuilderProvider {
      * @return Library builder configuration for given GlassFish server version.
      */
     public static URL getBuilderConfig(final Version version) {
-        if (version.matches("[6")) {
-            return ConfigBuilderProvider.class.getResource("GlassFishV6.xml");
-        } else if (version.matches("[5")) {
-            return ConfigBuilderProvider.class.getResource("GlassFishV5.xml");
-        } else {
-            return ConfigBuilderProvider.class.getResource("GlassFishV4.xml");
+        if (version.matches("[7")) {
+            return ConfigBuilderProvider.class.getResource("GlassFishV7.xml");
         }
+        
+        if (version.matches("[5")) {
+            return ConfigBuilderProvider.class.getResource("GlassFishV5.xml");
+        }
+           
+        return ConfigBuilderProvider.class.getResource("GlassFishV4.xml");
     }
 
     /**
