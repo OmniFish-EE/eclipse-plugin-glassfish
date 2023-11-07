@@ -23,7 +23,7 @@ Copyright (c) 2018 Oracle
 
 == Additional Copyright holders
 
-Copyright (c) 2018 XXXXX Foundation
+Copyright (c) 2018 Payara Foundation
 Copyright (c) 2023 OmniFish
 
 This project contains icons based on the org.eclipse.images
