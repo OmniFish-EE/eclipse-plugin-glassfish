@@ -2,7 +2,9 @@ OmniFish GlassFish Tools
 
 This project is based on Payara tools:
 
-Originally developed based on Eclipse GlassFish tools and donated to Payara by Arjan Tijms.
+Originally developed based on Eclipse GlassFish tools and donated to Payara by Arjan Tijms, further enhanced by Gaurav Gupta.
+
+* Payara project home: https://github.com/payara/ecosystem-eclipse-plugin
 
 This project is based on the Eclipse GlassFish tools:
 
