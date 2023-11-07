@@ -92,37 +92,6 @@ public final class GlassFishRuntimeLocatorDelegate extends RuntimeLocatorDelegat
         rwc.setAttribute("generic_server_instance_properties", props);
 
         final GlassFishRuntime gf = (GlassFishRuntime) rwc.loadAdapter(GlassFishRuntime.class, null);
-        
-//        final IGlassFishRuntimeModel gfmodel = gf.getModel();
-//        final Value<org.eclipse.sapphire.modeling.Path> javaRuntimeEnvironmentProperty = gfmodel
-//                .getJavaRuntimeEnvironment();
-
-//        if (javaRuntimeEnvironmentProperty.content() == null) {
-//            final Display display = Display.getDefault();
-//
-//            display.syncExec(new Runnable() {
-//                @Override
-//                public void run() {
-//                    new SapphireDialog(display.getActiveShell(), gfmodel,
-//                            DefinitionLoader.sdef(GlassFishRuntimeLocatorDelegate.class).dialog()).open();
-//                }
-//            });
-//
-//            if (javaRuntimeEnvironmentProperty.content() == null) {
-//                rwc.dispose();
-//                return null;
-//            } else {
-//                // Force JVM definition to be created
-//
-//                gf.getVMInstall();
-//
-//                // Clear the explicit JVM location as the DefaultValueService will now pick it
-//                // up
-//
-//                javaRuntimeEnvironmentProperty.clear();
-//            }
-//        }
-
         final IStatus validationResult = created.validate(null);
 
         if (validationResult.getSeverity() != IStatus.ERROR) {

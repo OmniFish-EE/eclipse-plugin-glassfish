@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IProcess;
@@ -40,18 +41,19 @@ import org.glassfish.eclipse.tools.server.GlassFishServerPlugin;
  */
 
 public class CreateGlassFishDomain extends MessageDialog {
+	
+	public static int MAXIMUM_PORT = 999999;
+	public static int DEFAULT_PORT = 8000;
+	public static String DEFAULT_DOMAIN = "domain1";
 
 	private Text domainName;
 	private Text domainDir;
 	private Spinner portBase;
 	private Label message;
-	private ProgressBar pb;
+	private ProgressBar progressBar;
 	private GlassFishServer glassfishServer;
 	private GlassFishRuntime runtime;
 	private String path;
-	public static int MAXIMUM_PORT = 999999;
-	public static int DEFAULT_PORT = 8000;
-	public static String DEFAULT_DOMAIN = "domain1";
 
 	public CreateGlassFishDomain(Shell parentShell, GlassFishServer glassfishServer, GlassFishRuntime runtime) {
 		super(parentShell, GlassfishWizardResources.newDomainTitle,
@@ -89,60 +91,27 @@ public class CreateGlassFishDomain extends MessageDialog {
 			}
 			return true;
 		}
+		
 		return false;
-
 	}
 
-//    @Override
-//    protected Object run(Presentation context) {
-//        IRuntime runtime = load(context.part().getModelElement().adapt(IServerWorkingCopy.class), GlassFishServer.class)
-//                .getServer()
-//                .getRuntime();
-//
-//        ICreateGlassFishDomainOp createDomainOperation = ICreateGlassFishDomainOp.TYPE.instantiate();
-//
-//        // Set existing domain location
-//        createDomainOperation.setLocation(fromPortableString(runtime.getLocation().toPortableString()));
-//
-//        // Set existing JDK location
-//        createDomainOperation.setJavaLocation(
-//                load(runtime, GlassFishRuntime.class).getVMInstall().getInstallLocation().getAbsolutePath());
-//
-//        // Explicitly open Sapphire dialog that asks the user to fill out fields for new domain
-//        WizardDialog dlg = new WizardDialog(
-//                Display.getDefault().getActiveShell(),
-//                new SapphireWizard<>(
-//                        createDomainOperation,
-//                        context(BaseWizardFragment.class)
-//                                .sdef("org.glassfish.eclipse.tools.server.ui.GlassFishUI")
-//                                .wizard("new-domain-wizard")));
-//
-//        // If user okay'ed dialog, copy the provided values to our model
-//        if (dlg.open() == OK) {
-//            IGlassFishServerModel model = (IGlassFishServerModel) context.part().getModelElement();
-//
-//            model.setDomainPath(createDomainOperation.getDomainDir().content().append(createDomainOperation.getName().content()));
-//            model.setDebugPort(createDomainOperation.getPortBase().content() + 9);
-//        }
-//
-//        createDomainOperation.dispose();
-//
-//        return null;
-//    }
-//            @Override
-
 	public boolean execute() {
-		if(!domainNameValidation()) {
+		if (!domainNameValidation()) {
 			return false;
 		}
+		
 		File asadmin = new File(new File(glassfishServer.getServerHome(), "bin"),
 				Platform.getOS().equals(Platform.OS_WIN32) ? "asadmin.bat" : "asadmin");
+		
 		if (asadmin.exists()) {
 			String javaExecutablePath = asadmin.getAbsolutePath();
-			String[] cmdLine = new String[] { javaExecutablePath, "create-domain", "--nopassword=true", "--portbase",
-					String.valueOf(portBase.getSelection()), "--domaindir", domainDir.getText(), domainName.getText() };
+			String[] cmdLine = new String[] { 
+					javaExecutablePath, 
+					"create-domain", "--nopassword=true", 
+					"--portbase", String.valueOf(portBase.getSelection()), 
+					"--domaindir", domainDir.getText(), domainName.getText() };
 
-			Process p = null;
+			Process realProcess = null;
 
 			try {
 				final StringBuilder output = new StringBuilder();
@@ -153,31 +122,37 @@ public class CreateGlassFishDomain extends MessageDialog {
 				String envp[] = new String[1];
 				envp[0] = "AS_JAVA=" + runtime.getVMInstall().getInstallLocation().getPath();
 
-				p = DebugPlugin.exec(cmdLine, null, envp);
-				IProcess process = DebugPlugin.newProcess(new Launch(null, RUN_MODE, null), p, "GlassFish asadmin"); //$NON-NLS-1$
+				realProcess = DebugPlugin.exec(cmdLine, null, envp);
+				IProcess eclipseProcess = DebugPlugin.newProcess(new Launch(null, RUN_MODE, null), realProcess, "GlassFish asadmin"); //$NON-NLS-1$
 
 				// Log output
-				process.getStreamsProxy().getOutputStreamMonitor().addListener((text, monitor) -> output.append(text));
+				eclipseProcess.getStreamsProxy().getOutputStreamMonitor().addListener((text, monitor) -> output.append(text));
 
-				process.getStreamsProxy().getErrorStreamMonitor()
-						.addListener((text, monitor) -> errOutput.append(text));
+				eclipseProcess.getStreamsProxy()
+				              .getErrorStreamMonitor()
+						      .addListener((text, monitor) -> errOutput.append(text));
+				
 				setMessage("");
+				
 				for (int i = 0; i < 600; i++) {
 					// Wait no more than 30 seconds (600 * 50 milliseconds)
-					if (process.isTerminated()) {
-						GlassFishServerPlugin.getInstance().getLog().log(new org.eclipse.core.runtime.Status(INFO,
-								SYMBOLIC_NAME, 1, output.toString() + "\n" + errOutput.toString(), null));
+					if (eclipseProcess.isTerminated()) {
+						GlassFishServerPlugin.getInstance()
+						                     .getLog()
+						                     .log(new Status(
+					                    		 INFO, SYMBOLIC_NAME, 1, 
+					                    		 output.toString() + "\n" + errOutput.toString(), null));
 						break;
 					}
 					try {
 						Thread.sleep(50);
-						pb.setSelection(i);
+						progressBar.setSelection(i);
 					} catch (InterruptedException e) {
 					}
 				}
 
-				File f = new File(domainDir.getText(), domainName.getText());
-				if (!f.exists()) {
+				File domainFile = new File(domainDir.getText(), domainName.getText());
+				if (!domainFile.exists()) {
 					setMessage("Error in creating the GlassFish Server domain");
 					return false;
 				}
@@ -186,11 +161,12 @@ public class CreateGlassFishDomain extends MessageDialog {
 				setMessage(ioe.getMessage());
 				return false;
 			} finally {
-				if (p != null) {
-					p.destroy();
+				if (realProcess != null) {
+					realProcess.destroy();
 				}
 			}
 		}
+		
 		path = domainDir.getText() + File.separator + domainName.getText();
 		return true;
 	}
@@ -198,12 +174,11 @@ public class CreateGlassFishDomain extends MessageDialog {
 	private void setMessage(String text) {
 		message.setText(text);
 		message.setVisible(!text.isEmpty());
-		pb.setVisible(text.isEmpty());
+		progressBar.setVisible(text.isEmpty());
 	}
 
 	@Override
 	protected Control createCustomArea(Composite parent) {
-
 		Composite container = new Composite(parent, SWT.NONE);
 		GridLayout grid = new GridLayout(2, false);
 		grid.marginWidth = 0;
@@ -278,13 +253,14 @@ public class CreateGlassFishDomain extends MessageDialog {
 		data.horizontalSpan = 2;
 		message.setLayoutData(data);
 		message.setForeground(parent.getShell().getDisplay().getSystemColor(SWT.COLOR_RED));
-		pb = new ProgressBar(group, SWT.HORIZONTAL);
+		progressBar = new ProgressBar(group, SWT.HORIZONTAL);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
-		pb.setLayoutData(data);
-		pb.setMinimum(0);
-		pb.setMaximum(100);
-		pb.setVisible(false);
+		progressBar.setLayoutData(data);
+		progressBar.setMinimum(0);
+		progressBar.setMaximum(100);
+		progressBar.setVisible(false);
+		
 		return container;
 	}
 
