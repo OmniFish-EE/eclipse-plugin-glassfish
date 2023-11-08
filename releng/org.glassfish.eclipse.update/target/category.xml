@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.glassfish.eclipse.tools.server.feature_2.2.0.jar" id="org.glassfish.eclipse.tools.server.feature" version="7.0.0">
+      <category name="org.glassfish.category"/>
+   </feature>
+   <category-def name="org.glassfish.category" label="GlassFish Tools"/>
+</site>

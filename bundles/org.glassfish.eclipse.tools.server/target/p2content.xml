@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='1'>
+  <unit id='org.glassfish.eclipse.tools.server' version='7.0.0' generation='2'>
+    <update id='org.glassfish.eclipse.tools.server' range='[0.0.0,7.0.0)' severity='0'/>
+    <properties size='7'>
+      <property name='org.eclipse.equinox.p2.name' value='GlassFish Server Tools'/>
+      <property name='org.eclipse.equinox.p2.provider' value='GlassFish'/>
+      <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+      <property name='maven-groupId' value='org.glassfish.eclipse'/>
+      <property name='maven-artifactId' value='org.glassfish.eclipse.tools.server'/>
+      <property name='maven-version' value='7.0.0'/>
+      <property name='maven-type' value='eclipse-plugin'/>
+    </properties>
+    <provides size='4'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.glassfish.eclipse.tools.server' version='7.0.0'/>
+      <provided namespace='osgi.bundle' name='org.glassfish.eclipse.tools.server' version='7.0.0'/>
+      <provided namespace='osgi.identity' name='org.glassfish.eclipse.tools.server' version='7.0.0'>
+        <properties size='1'>
+          <property name='type' value='osgi.bundle'/>
+        </properties>
+      </provided>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+    </provides>
+    <requires size='49'>
+      <required namespace='osgi.bundle' name='org.eclipse.emf.codegen' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.server.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.j2ee' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.server.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.servlet.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.j2ee.ejb' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.common.project.facet.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.common.project.facet.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.j2ee' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.j2ee.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.j2ee.ejb' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.j2ee.web' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.j2ee.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.jee.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jst.server.generic.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.wst.server.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.wst.server.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.wst.common.project.facet.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.wst.common.project.facet.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.wst.common.frameworks.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.ui.console' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.ui.forms' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.ui.navigator' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.ui.workbench.texteditor' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.text' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.swt' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jem.util' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='com.sun.jna' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='com.sun.jna.platform' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.apache.ant' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.m2e.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.m2e.core.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.m2e.archetype.common' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.debug.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.debug.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.core.expressions' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.core.externaltools' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jdt.core' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jdt.debug' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jdt.debug.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jdt.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jdt.launching' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.datatools.connectivity' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.datatools.connectivity.ui' range='0.0.0'/>
+      <required namespace='java.package' name='org.eclipse.ui.navigator.resources' range='0.0.0'/>
+      <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=17))'>
+        <description>
+          org.glassfish.eclipse.tools.server
+        </description>
+      </requiredProperties>
+    </requires>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='org.glassfish.eclipse.tools.server' version='7.0.0'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-SymbolicName: org.glassfish.eclipse.tools.server;singleton:=true&#xA;Bundle-Version: 7.0.0&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+</units>
