@@ -24,12 +24,6 @@
             <artifactId>ant</artifactId>
             <version>1.8.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.wst.server</groupId>
-            <artifactId>ui</artifactId>
-            <version>1.0.205-v20070912</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>

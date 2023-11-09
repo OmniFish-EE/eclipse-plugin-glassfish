@@ -16,6 +16,15 @@
  * SPDX-License-Identifier: EPL-2.0
  ******************************************************************************/
 
+/******************************************************************************
+ * Copyright (c) 2023 OmniFish
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ * SPDX-License-Identifier: EPL-2.0
+ ******************************************************************************/
+
 package org.glassfish.eclipse.tools.server.internal;
 
 import static org.eclipse.core.runtime.Status.OK_STATUS;
@@ -73,7 +82,7 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
     }
 
     private static class Stub extends IRuntimeBridge.Stub {
-        private String id;
+        private final String id;
 
         public Stub(String id) {
             this.id = id;
@@ -81,8 +90,8 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
 
         @Override
         public List<IRuntimeComponent> getRuntimeComponents() {
-            List<IRuntimeComponent> components = new ArrayList<>(2);
-            final IRuntime runtime = findRuntime(this.id);
+            final List<IRuntimeComponent> components = new ArrayList<>(2);
+            final IRuntime runtime = findRuntime(id);
 
             if (runtime == null) {
                 return components;
@@ -94,17 +103,10 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
                 final Version glassfishVersion = glassfishRuntime.getVersion();
 
                 if (glassfishVersion != null) {
-                    String glassfishMainVersion;
-                    if(glassfishVersion.matches("[6")) {
-                        glassfishMainVersion = "6";
-                    } else if(glassfishVersion.matches("[5")) {
-                        glassfishMainVersion = "5";
-                    } else if(glassfishVersion.matches("[4")) {
-                        glassfishMainVersion = "4";
-                    } else {
-                        glassfishMainVersion = "3.1";
-                    }
-                    IRuntimeComponentVersion glassfishComponentVersion = getRuntimeComponentType("glassfish.runtime").getVersion(glassfishMainVersion);
+                    
+                    IRuntimeComponentVersion glassfishComponentVersion = 
+                        getRuntimeComponentType("glassfish.runtime")
+                            .getVersion(getGlassfishMainVersion(glassfishVersion));
 
                     Map<String, String> properties = new HashMap<>(5);
                     if (runtime.getLocation() != null) {
@@ -123,11 +125,9 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
                     components.add(createRuntimeComponent(glassfishComponentVersion, properties));
 
                     // Java Runtime Environment
-
                     components.add(StandardJreRuntimeComponent.create(glassfishRuntime.getVMInstall()));
 
                     // Other
-
                     components.addAll(RuntimeComponentProvidersExtensionPoint.getRuntimeComponents(runtime));
                 }
             }
@@ -142,9 +142,9 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
             if (runtime != null) {
                 properties.put("id", runtime.getId());
                 properties.put("localized-name", runtime.getName());
-                String s = ((Runtime) runtime).getAttribute("alternate-names", (String) null);
-                if (s != null) {
-                    properties.put("alternate-names", s);
+                String alternateNames = ((Runtime) runtime).getAttribute("alternate-names", (String) null);
+                if (alternateNames != null) {
+                    properties.put("alternate-names", alternateNames);
                 }
             }
 
@@ -153,10 +153,11 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
 
         @Override
         public IStatus validate(final IProgressMonitor monitor) {
-            final IRuntime runtime = findRuntime(this.id);
+            final IRuntime runtime = findRuntime(id);
             if (runtime != null) {
                 return runtime.validate(monitor);
             }
+            
             return OK_STATUS;
         }
 
@@ -172,6 +173,26 @@ public final class GlassFishRuntimeBridge implements IRuntimeBridge {
             }
 
             return null;
+        }
+        
+        private static final String getGlassfishMainVersion(final Version glassfishVersion) {
+            if (glassfishVersion.matches("[7")) {
+                return "7";
+            }
+
+            if (glassfishVersion.matches("[6")) {
+                return "6";
+            }
+
+            if (glassfishVersion.matches("[5")) {
+                return "5";
+            }
+
+            if (glassfishVersion.matches("[4")) {
+                return "4";
+            }
+
+            return "3.1";
         }
     }
 
