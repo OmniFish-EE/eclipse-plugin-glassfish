@@ -79,7 +79,9 @@ public abstract class AbstractLogFilter implements ILogFilter {
     public abstract String process(String line);
 
     public static AbstractLogFilter createFilter(GlassFishServer server) {
-        if (server.getVersion().matches("[4")) {
+        if (server.getVersion().matches("[7")) {
+            return new PatternLogFilterV7();
+        } else if (server.getVersion().matches("[4")) {
             return new PatternLogFilterV4();
         } else {
             return new StateLogFilterV3();
