@@ -34,17 +34,23 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.glassfish.eclipse.tools.server.GlassFishServerPlugin;
+import org.glassfish.eclipse.tools.server.log.AbstractLogFilter;
+import org.glassfish.eclipse.tools.server.log.LevelResolver;
 
 public class LogStyle implements LineStyleListener, IPropertyChangeListener {
     Display display = Display.getCurrent();
 
     IPreferenceStore store = GlassFishServerPlugin.getInstance().getPreferenceStore();
     boolean colorInConsole = store.getBoolean(ENABLE_COLORS_CONSOLE);
+    String warningLocalizedName, severeLocalizedName;
 
     // private IDocument document;
 
     public LogStyle(IDocument document) {
         store.addPropertyChangeListener(this);
+        AbstractLogFilter.ILevelResolver levelResolver = new LevelResolver();
+        warningLocalizedName = levelResolver.resolve(Level.WARNING.getName());
+        severeLocalizedName = levelResolver.resolve(Level.SEVERE.getName());
     }
 
     @Override
@@ -54,19 +60,19 @@ public class LogStyle implements LineStyleListener, IPropertyChangeListener {
         int start;
 
         if (colorInConsole) {
-            if ((start = buf.indexOf(Level.WARNING.getName())) != -1) {
+            if ((start = buf.indexOf(warningLocalizedName)) != -1) {
                 styleRange = new StyleRange();
                 styleRange.start = event.lineOffset + start;
-                styleRange.length = 6;
+                styleRange.length = warningLocalizedName.length()-1;
                 styleRange.foreground = display.getSystemColor(SWT.COLOR_DARK_YELLOW);
-            } else if ((start = buf.indexOf(Level.SEVERE.getName())) != -1) {
-                // Makr severe error and exception stack trace as error color
+            } else if ((start = buf.indexOf(severeLocalizedName)) != -1) {
+                // Mark severe error and exception stack trace as error color
                 styleRange = new StyleRange();
                 String errorColorName = org.eclipse.jface.preference.JFacePreferences.ERROR_COLOR;
                 styleRange.foreground = PlatformUI.getWorkbench().getThemeManager().getCurrentTheme().getColorRegistry()
                         .get(errorColorName);
                 styleRange.start = event.lineOffset + start;
-                styleRange.length = 5;
+                styleRange.length = severeLocalizedName.length()-1;
                 styleRange.fontStyle = SWT.BOLD;
             } else if ((start = buf.indexOf("FATAL")) != -1) {
                 styleRange = new StyleRange();
