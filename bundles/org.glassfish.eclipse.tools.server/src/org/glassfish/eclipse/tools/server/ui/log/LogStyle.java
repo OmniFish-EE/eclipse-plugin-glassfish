@@ -54,19 +54,19 @@ public class LogStyle implements LineStyleListener, IPropertyChangeListener {
         int start;
 
         if (colorInConsole) {
-            if ((start = buf.indexOf(Level.WARNING.getName())) != -1) {
+            if ((start = buf.indexOf(Level.WARNING.getLocalizedName())) != -1) {
                 styleRange = new StyleRange();
                 styleRange.start = event.lineOffset + start;
-                styleRange.length = 6;
+                styleRange.length = Level.WARNING.getLocalizedName().length()-1;
                 styleRange.foreground = display.getSystemColor(SWT.COLOR_DARK_YELLOW);
-            } else if ((start = buf.indexOf(Level.SEVERE.getName())) != -1) {
-                // Makr severe error and exception stack trace as error color
+            } else if ((start = buf.indexOf(Level.SEVERE.getLocalizedName())) != -1) {
+                // Mark severe error and exception stack trace as error color
                 styleRange = new StyleRange();
                 String errorColorName = org.eclipse.jface.preference.JFacePreferences.ERROR_COLOR;
                 styleRange.foreground = PlatformUI.getWorkbench().getThemeManager().getCurrentTheme().getColorRegistry()
                         .get(errorColorName);
                 styleRange.start = event.lineOffset + start;
-                styleRange.length = 5;
+                styleRange.length = Level.SEVERE.getLocalizedName().length()-1;
                 styleRange.fontStyle = SWT.BOLD;
             } else if ((start = buf.indexOf("FATAL")) != -1) {
                 styleRange = new StyleRange();
