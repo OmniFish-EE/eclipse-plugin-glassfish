@@ -34,11 +34,11 @@ import java.util.logging.Level;
 
 import org.glassfish.eclipse.tools.server.log.AbstractLogFilter.ILevelResolver;
 
-class LevelResolver implements ILevelResolver {
+public class LevelResolver implements ILevelResolver {
 
     private Map<String, String> localizedLevels;
 
-    LevelResolver() {
+    public LevelResolver() {
         Locale defaultLocale = null;
 
         try {
